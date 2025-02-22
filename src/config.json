@@ -3,7 +3,9 @@
     "DEVELOPMENT": {
         "SERVER": ""
     },
-    "APPLICATION": {},
+    "APPLICATION": {
+        "INFORMATIVE_LOGGING": true
+    },
     "DISCOGS": {},
     "LASTFM": {},
     "EMBEDS": {
