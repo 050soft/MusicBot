@@ -1,0 +1,24 @@
+{
+  "name": "musicbot",
+  "version": "0.0.0",
+  "description": "A Discord music bot that features extensive last.fm and Discogs integrations ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damger9/MusicBot.git"
+  },
+  "keywords": [
+    "lastfm",
+    "discogs",
+    "music"
+  ],
+  "author": "Not_H3",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/damger9/MusicBot/issues"
+  },
+  "homepage": "https://github.com/damger9/MusicBot#readme"
+}
