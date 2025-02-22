@@ -1,0 +1,10 @@
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+build/
+node_modules
+package-lock.json
+.vs
+.vscode
