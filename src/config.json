@@ -1,9 +1,11 @@
 {
     "DATABASE": {},
     "DEVELOPMENT": {
-        "SERVER": ""
+        "DEVMODE": true,
+        "SERVER": "1126449389095882802"
     },
     "APPLICATION": {
+        "ID": "1342801329294282823",
         "INFORMATIVE_LOGGING": true
     },
     "DISCOGS": {},
