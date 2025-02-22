@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/damger9/MusicBot/issues"
   },
-  "homepage": "https://github.com/damger9/MusicBot#readme"
+  "homepage": "https://github.com/damger9/MusicBot#readme",
+  "dependencies": {
+    "discord.js": "^14.18.0"
+  }
 }

@@ -1,0 +1,14 @@
+{
+    "DATABASE": {},
+    "DEVELOPMENT": {
+        "SERVER": ""
+    },
+    "APPLICATION": {},
+    "DISCOGS": {},
+    "LASTFM": {},
+    "EMBEDS": {
+        "SUCCESS": "#FF0000",
+        "ERROR": "#00FF80",
+        "NORMAL": "3BA55C"
+    }
+}
