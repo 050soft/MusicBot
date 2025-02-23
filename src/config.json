@@ -13,6 +13,8 @@
     "EMBEDS": {
         "SUCCESS": "#FF0000",
         "ERROR": "#00FF80",
-        "NORMAL": "3BA55C"
+        "NORMAL": "3BA55C",
+        "DISCOGS_EMOJI": "<:discogs:1343152643253731368>",
+        "LASTFM_EMOJI": "<:lastfm:1343152605722837003>"
     }
 }
