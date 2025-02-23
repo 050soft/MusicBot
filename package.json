@@ -27,6 +27,6 @@
     "dotenv": "^16.4.7",
     "mongodb": "^6.13.1",
     "mongoose": "^8.10.1",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^2.7.0"
   }
 }
