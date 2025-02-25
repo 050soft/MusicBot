@@ -4,7 +4,7 @@ Might make this into a trello page
 
 ## TODO
 - [ ] Make GetToken and GetUrl one function, since they're always used together anyways
-- [ ] Easy reply embeds instead of plain messages
+- [ ] Easy reply embed functions instead of plain messages
 - [ ] Privacy configuration 
   - [ ] Make /playing privacy toggeable
     - [ ] Add the command to toggle
