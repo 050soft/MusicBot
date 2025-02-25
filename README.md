@@ -12,6 +12,8 @@ DISCOGS_CONSUMER_SECRET=DISCOGS_CONSUMER_SECRET
 LASTFM_API_KEY=LASTFM_API_KEY
 LASTFM_SHARED_SECRET=LASTFM_SHARED_SECRET
 MONGODB_DATABASE_URL=MONGODB_DATABASE_URL
+MONGODB_DATABASE_USER=MONGODB_DATABASE_USER
+MONGODB_DATABASE_PASSWORD=MONGODB_DATABASE_PASSWORD
 ```
 
 To get the actual keys, secrets and tokens to run the bot properly you will have to create a Discord bot application, a Last.fm API account and a Discogs API account. The database URL could be a direct URL to a MongoDB cloud database.
