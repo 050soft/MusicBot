@@ -18,6 +18,9 @@ MONGODB_DATABASE_PASSWORD=MONGODB_DATABASE_PASSWORD
 
 To get the actual keys, secrets and tokens to run the bot properly you will have to create a Discord bot application, a Last.fm API account and a Discogs API account. The database URL could be a direct URL to a MongoDB cloud database.
 
+## TODO
+See [TODO.md](TODO.md)
+
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md)
 
