@@ -20,6 +20,6 @@ export default <IEvent> {
                 bot.FeaturedTrack = np.track[0];
                 bot.user?.setPresence({activities: [{ type: ActivityType.Custom, name: "music", state: `Featured: ${trackName} - ${trackArtist}` }] });
             }
-        }, 10_000);
+        }, 300_000);
     }
 }
