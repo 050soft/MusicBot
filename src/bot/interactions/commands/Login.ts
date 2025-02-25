@@ -18,7 +18,6 @@ export default <ISlashCommand> {
                 if (selection.values[0] == "discogs") {
                     return await interaction.editReply({ content: "Logging in with Discogs is not supported yet!", components: [] });
                 } else if (selection.values[0] == "lastfm") {
-                    // lastfm
                     const token = await interaction.Bot.LastFMAuthManager.GetToken();
                     if (!token) return;
                     const url = await interaction.Bot.LastFMAuthManager.GetUrl(interaction.user, token);
