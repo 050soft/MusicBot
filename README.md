@@ -3,7 +3,7 @@ name is subject to change once I think of one
 
 I started this project to develop my skills further by challenging myself with some new things and to develop my portfolio. However, feel free to contribute if you wish. Any code help or even tips on what to change are greatly appreciated.    
 
-To run this bot for yourself, rename the .env-example file to just .env, then fill in everything like so
+To run this bot for yourself, rename the .env-example file to just .env, then fill in everything with your info.
 ```shell
 TOKEN=DISCORD_TOKEN
 PUBLIC_KEY=DISCORD_PUBLIC_KEY
