@@ -4,7 +4,6 @@ name is subject to change once I think of one
 I started this project to develop my skills further by challenging myself with some new things and to develop my portfolio. However, feel free to contribute if you wish. Any code help or even tips on what to change are greatly appreciated.    
 
 # Usage
-
 To run this bot for yourself, rename the [.env-example](.env-example) file to .env, then fill in everything with your info.
 <details><summary><b>.env example</b></summary>
 
