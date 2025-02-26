@@ -86,8 +86,7 @@ class LastfmAuthManager {
         return userData;
     }
 
-    // make private
-    public async GetToken(): Promise<string | undefined> {
+    private async GetToken(): Promise<string | undefined> {
         const path = "?method=auth.gettoken";
 
         // convert to sig function
@@ -103,11 +102,13 @@ class LastfmAuthManager {
         return token;
     }
 
-    public async GetUrl(user: User, token: string): Promise<string | undefined> {
-        const url = `${this.AuthURL}&token=${token}`;
-
+    public async GetUrl(user: User): Promise<string | undefined> {
+        const token = await this.GetToken();
+        if (!token) return;
+ 
         this.CurrentlyAuthenticating.set(user, token);
 
+        const url = `${this.AuthURL}&token=${token}`;
         return url;
     }
 
@@ -115,13 +116,14 @@ class LastfmAuthManager {
     public async GetNowPlaying(sessionKey: string, user: string): Promise<undefined | RecentTracks> {
         const path = "?method=user.getRecentTracks";
 
-        const params = {
-            "api_key": this.API_KEY,
-            "sk": sessionKey,
-            "method": "user.getRecentTracks"
-        }
+        // TODO -> implement this.
+        // const params = {
+        //     "api_key": this.API_KEY,
+        //     "sk": sessionKey,
+        //     "method": "user.getRecentTracks"
+        // }
 
-        const now = Math.round(Date.now() / 1000)
+        const now = Math.round(Date.now() / 1000);
         const from = now - 86400;
 
         const fullUrl = `${this.BaseURL}${path}&api_key=${this.API_KEY}&format=${this.Format}&limit=1&user=${user}&sk=${sessionKey}&from=${from}&extended=1`;

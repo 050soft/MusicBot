@@ -13,8 +13,8 @@ Might make this into a trello page
 - [ ] Add structure to lastfm handling, AuthManager.ts handles stuff that isn't directly auth related.
 
 ## In progress
-- [ ] Make GetToken and GetUrl one function, since they're always used together anyways
 - [ ] Go through the "TODO" comments in the code and resolve them.
 - [ ] Easy reply embed functions instead of plain messages
 
 ## Done
+- [x] Make GetToken and GetUrl one function, since they're always used together anyways
