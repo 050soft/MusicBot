@@ -116,17 +116,22 @@ class LastfmAuthManager {
     public async GetNowPlaying(sessionKey: string, user: string): Promise<undefined | RecentTracks> {
         const path = "?method=user.getRecentTracks";
 
-        // TODO -> implement this.
-        // const params = {
-        //     "api_key": this.API_KEY,
-        //     "sk": sessionKey,
-        //     "method": "user.getRecentTracks"
-        // }
-
         const now = Math.round(Date.now() / 1000);
         const from = now - 86400;
 
-        const fullUrl = `${this.BaseURL}${path}&api_key=${this.API_KEY}&format=${this.Format}&limit=1&user=${user}&sk=${sessionKey}&from=${from}&extended=1`;
+        const params = {
+            "api_key": this.API_KEY,
+            "sk": sessionKey,
+            "method": "user.getRecentTracks",
+            "from": from,
+            "limit": 1,
+            "extended": 1,
+            "user": user,
+        }
+
+        const sig = this.GetSig(params);
+
+        const fullUrl = `${this.BaseURL}${path}&api_key=${this.API_KEY}&api_sig=${sig}&format=${this.Format}&limit=1&user=${user}&sk=${sessionKey}&from=${from}&extended=1`;
         const response = await fetch(fullUrl);
         const body = await response.json();
 
