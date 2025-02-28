@@ -1,14 +1,16 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/" 
-  schedule:
-      interval: "daily"
-  reviewers:
-    - "damger9"
-  assignees:
-    - "damger9"
-  labels:
-    - "npm dependencies"
-  commit-message: 
-    prefix: "npm"
+    directory: "/"
+    schedule:
+      interval: "dao;y"
+
+    reviewers:
+      - "damger9"
+
+    assignees:
+      - "damger92"
+    labels:
+      - "npm dependencies"
+    commit-message: 
+      prefix: "npm"
