@@ -41,7 +41,11 @@ export default <IEvent> {
                 await command.execute(interaction)
             } catch (error) {
                 if (error instanceof MongoError) {
-
+                    if (interaction.replied) {
+                        await interaction.editReply({ content: "A database error occured", embeds: [], components: [] });
+                    } else {
+                        await interaction.reply({ content: "A database error occured", embeds: [], components: [] });
+                    }
                 } else if (error instanceof BotError) {
                     // TODO -> Move to file
                     if (interaction.replied) {
