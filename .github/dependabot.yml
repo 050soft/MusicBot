@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "dao;y"
+      interval: "daily"
 
     reviewers:
       - "damger9"
