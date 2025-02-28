@@ -1,5 +1,7 @@
 import { Collection, Events, Interaction } from "discord.js";
 import IEvent from "../../interfaces/IEvent";
+import { MongoError } from "mongodb";
+import BotError from "../errors/BotError";
 
 export default <IEvent> {
     name: Events.InteractionCreate,
@@ -37,7 +39,20 @@ export default <IEvent> {
 
             try {
                 await command.execute(interaction)
-            } catch (error) { // ERROR HANDLER PLEASE
+            } catch (error) {
+                if (error instanceof MongoError) {
+
+                } else if (error instanceof BotError) {
+                    // TODO -> Move to file
+                    if (interaction.replied) {
+                        await interaction.editReply({ content: error.message, embeds: [], components: [] });
+                    } else {
+                        await interaction.reply({ content: error.message, embeds: [], components: [] });
+                    }
+
+                    return;
+                } 
+
                 // if (error instanceof MongoError) {
                 //     bot.Logger.Error(`${error.message} - ${error.stack}`);
                 //     if (error.message.endsWith("10000ms")) {
