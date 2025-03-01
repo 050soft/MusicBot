@@ -1,6 +1,7 @@
 enum ErrorCodes {
     invalidErrorCode,
     
+    cannotReplyToInteraction,
     notLoggedIn,
 }
 

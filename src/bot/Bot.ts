@@ -1,4 +1,4 @@
-import { Client, ClientOptions, Collection, REST, Routes } from "discord.js";
+import { ActionRowBuilder, APIEmbedField, Client, ClientOptions, Collection, EmbedBuilder, Interaction, MessageActionRowComponentBuilder, REST, Routes } from "discord.js";
 import ISlashCommand from "../interfaces/ISlashCommand";
 import { readdirSync } from "fs"
 import { join } from "path";
@@ -7,6 +7,8 @@ import config from "../config.json";
 import LastfmAuthManager from "../lastfm/AuthManager";
 import DatabaseManager from "../database/DatabaseManager";
 import { Track } from "../lastfm/responses/user/GetRecentTracks";
+import BotError from "./errors/BotError";
+import ErrorCodes from "./errors/ErrorCodes";
 
 interface Bot {}
 class Bot extends Client {
@@ -59,6 +61,36 @@ class Bot extends Client {
 
         const dateString = new Date().toLocaleString();
         console.log(`${dateString} | ${type?.toUpperCase() || "INFORMATION"} - ${message}`);
+    }
+
+    // Maybe convert the data argument to an interface instead of this
+    public async ReplyEmbed(interaction: Interaction, data: { title?: string, description: string, fields?: APIEmbedField[], components?: ActionRowBuilder<MessageActionRowComponentBuilder>[], thumbnail?: string, ephemeral?: boolean }) {
+        if (!interaction.isRepliable()) {
+            throw new BotError(ErrorCodes.cannotReplyToInteraction, interaction.type);
+        }
+
+        const { title, description, fields, components, thumbnail, ephemeral } = data;
+        // if (!message) {}
+
+
+        const embed = new EmbedBuilder();
+
+        if (title) {
+            embed.setTitle(title);
+        }        
+        embed.setDescription(description);
+        if (fields) {
+            embed.addFields(fields);
+        }
+        if (thumbnail) {
+            embed.setThumbnail(thumbnail);
+        }
+
+        if (interaction.deferred || interaction.replied) {
+            return await interaction.editReply({ content: "", embeds: [embed], components: components });
+        }
+
+        return await interaction.reply({ content: "", embeds: [embed], components: components, ephemeral: ephemeral });
     }
 
     private async Start() {
