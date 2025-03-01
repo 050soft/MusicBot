@@ -102,7 +102,7 @@ class Bot extends Client {
     }
 
     private async HandleAndRegisterEvents() {
-        const eventsPath = join(__dirname, 'Events')
+        const eventsPath = join(__dirname, 'events');
         const eventFiles = readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
         for (let file of eventFiles) {
