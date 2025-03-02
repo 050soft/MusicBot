@@ -7,7 +7,7 @@ export default <IEvent> {
 
     async execute(bot) {
         bot.Log(`Logged in as: ${bot.user?.tag}!`);
-        bot.Log(`Total Guilds: ${bot.guilds.cache.size}`);
+        bot.Log(`Total Guilds: ${await bot.GetGuildCount()}`);
 
         setInterval(async function() {
             const user = "436950036098842645";
