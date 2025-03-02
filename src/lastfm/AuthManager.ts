@@ -146,7 +146,7 @@ class LastfmAuthManager {
 
         // We've ensured the response is a proper one here
         const recentTracks: GetRecentTracks = body;
-        if (!recentTracks.recenttracks.track[0].name) {
+        if (!recentTracks.recenttracks.track[0]) {
             throw new BotError(ErrorCodes.cannotGetCurrentlyPlaying);
         } 
 

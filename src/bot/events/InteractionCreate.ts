@@ -40,37 +40,28 @@ export default <IEvent> {
             try {
                 await command.execute(interaction)
             } catch (error) {
+                bot.Log(error as string, "error");
+
                 if (error instanceof MongoError) {
-                    if (interaction.replied) {
-                        await interaction.editReply({ content: "A database error occured", embeds: [], components: [] });
+                    if (interaction.replied || interaction.deferred) {
+                        return await interaction.editReply({ content: "A database error occured", embeds: [], components: [] });
                     } else {
-                        await interaction.reply({ content: "A database error occured", embeds: [], components: [] });
+                        return await interaction.reply({ content: "A database error occured", embeds: [], components: [] });
                     }
                 } else if (error instanceof BotError) {
                     // TODO -> Move to file
-                    if (interaction.replied) {
-                        await interaction.editReply({ content: `${error.message}\n-# Version: ${bot.BotVersion}`, embeds: [], components: [] });
+                    if (interaction.replied || interaction.deferred) {
+                        return await interaction.editReply({ content: `${error.message}\n-# Version: ${bot.BotVersion}`, embeds: [], components: [] });
                     } else {
-                        await interaction.reply({ content: `${error.message}\n-# Version: ${bot.BotVersion}`, embeds: [], components: [] });
+                        return await interaction.reply({ content: `${error.message}\n-# Version: ${bot.BotVersion}`, embeds: [], components: [] });
                     }
-
-                    return;
                 } 
 
-                // if (error instanceof MongoError) {
-                //     bot.Logger.Error(`${error.message} - ${error.stack}`);
-                //     if (error.message.endsWith("10000ms")) {
-                //         return await bot.ErrorEmbed(interaction, "The database has timed out after 10 seconds - There could be a database outage");
-                //     } else {
-                //         await bot.ErrorEmbed(interaction, "A database error has occured - Please try again!");
-                //     }
-                // } else if (error instanceof BotError) {
-                //     // custom log here if needed for some - don't log all in console as some don't need logging (low severity / users fault most of the time)
-                //     return await bot.ErrorEmbed(interaction, error.message);
-                // }
-
-                bot.Log(error as string, "error");
-                //return await bot.ErrorEmbed(interaction, "An unknown error occured");
+                if (interaction.replied || interaction.deferred) {
+                    return await interaction.editReply({ content: `${error}\n-# Version: ${bot.BotVersion}`, embeds: [], components: [] });
+                } else {
+                    return await interaction.reply({ content: `${error}\n-# Version: ${bot.BotVersion}`, embeds: [], components: [] });
+                }
             }
         }
     }
