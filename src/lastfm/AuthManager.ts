@@ -4,6 +4,8 @@ import GetRecentTracks, { RecentTracks } from "./responses/user/GetRecentTracks"
 import ErrorResponse from "./responses/ErrorResponse";
 import { Collection, User } from "discord.js";
 import UserDB from "../database/models/UserDB";
+import BotError from "../bot/errors/BotError";
+import ErrorCodes from "../bot/errors/ErrorCodes";
 
 class LastfmAuthManager {
     public readonly API_KEY = process.env.LASTFM_API_KEY as string;
@@ -140,10 +142,14 @@ class LastfmAuthManager {
             throw new Error(`LastFM api error, message: ${error.message}, code: ${error.error}`)
         }
 
-        if (!body.recenttracks) throw new Error("Invalid");
+        if (!body.recenttracks) throw new BotError(ErrorCodes.cannotGetCurrentlyPlaying);
 
         // We've ensured the response is a proper one here
         const recentTracks: GetRecentTracks = body;
+        if (!recentTracks.recenttracks.track[0].name) {
+            throw new BotError(ErrorCodes.cannotGetCurrentlyPlaying);
+        } 
+
         return recentTracks.recenttracks;
     }
 
