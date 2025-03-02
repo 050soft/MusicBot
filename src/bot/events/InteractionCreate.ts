@@ -35,7 +35,7 @@ export default <IEvent> {
             commandCooldowns.set(interaction.user.id, now);
             setTimeout(() => commandCooldowns.delete(interaction.user.id), cooldownAmount);
 
-            interaction.Bot = bot
+            interaction.Bot = bot;
 
             try {
                 await command.execute(interaction)
@@ -49,9 +49,9 @@ export default <IEvent> {
                 } else if (error instanceof BotError) {
                     // TODO -> Move to file
                     if (interaction.replied) {
-                        await interaction.editReply({ content: error.message, embeds: [], components: [] });
+                        await interaction.editReply({ content: `${error.message}\n-# Version: ${bot.BotVersion}`, embeds: [], components: [] });
                     } else {
-                        await interaction.reply({ content: error.message, embeds: [], components: [] });
+                        await interaction.reply({ content: `${error.message}\n-# Version: ${bot.BotVersion}`, embeds: [], components: [] });
                     }
 
                     return;

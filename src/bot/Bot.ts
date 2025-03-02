@@ -10,6 +10,10 @@ import { Track } from "../lastfm/responses/user/GetRecentTracks";
 import BotError from "./errors/BotError";
 import ErrorCodes from "./errors/ErrorCodes";
 
+// Version
+import { version } from "../../package.json";
+const currentYear = new Date().getFullYear();
+
 interface Bot {}
 class Bot extends Client {
     public SlashCommands: Collection<string, ISlashCommand>;
@@ -91,6 +95,14 @@ class Bot extends Client {
         }
 
         return await interaction.reply({ content: "", embeds: [embed], components: components, ephemeral: ephemeral });
+    }
+
+    public get BotVersion(): string {
+        return `${currentYear}.${version}`; 
+    }
+
+    public async GetGuildCount (): Promise<number> {
+        return this.guilds.cache.size;
     }
 
     private async Start() {
