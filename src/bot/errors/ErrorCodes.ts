@@ -2,7 +2,7 @@ enum ErrorCodes {
     invalidErrorCode,
     
     cannotReplyToInteraction,
-    notPlayingAnything,
+    cannotGetCurrentlyPlaying,
     notLoggedIn,
 }
 
