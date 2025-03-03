@@ -1,4 +1,4 @@
-import { ActionRowBuilder, APIEmbedField, Client, ClientOptions, Collection, EmbedBuilder, Interaction, MessageActionRowComponentBuilder, REST, Routes } from "discord.js";
+import { ActionRowBuilder, APIEmbedField, Client, ClientOptions, Collection, ColorResolvable, EmbedBuilder, Interaction, MessageActionRowComponentBuilder, REST, Routes } from "discord.js";
 import ISlashCommand from "../interfaces/ISlashCommand";
 import { readdirSync } from "fs"
 import { join } from "path";
@@ -68,16 +68,18 @@ class Bot extends Client {
     }
 
     // Maybe convert the data argument to an interface instead of this
-    public async ReplyEmbed(interaction: Interaction, data: { title?: string, description: string, fields?: APIEmbedField[], components?: ActionRowBuilder<MessageActionRowComponentBuilder>[], thumbnail?: string, ephemeral?: boolean }) {
+    public async ReplyEmbed(interaction: Interaction, data: { content?: string, title?: string, description: string, fields?: APIEmbedField[], components?: ActionRowBuilder<MessageActionRowComponentBuilder>[], thumbnail?: string, ephemeral?: boolean }) {
         if (!interaction.isRepliable()) {
             throw new BotError(ErrorCodes.cannotReplyToInteraction, interaction.type);
         }
 
-        const { title, description, fields, components, thumbnail, ephemeral } = data;
+        const { content, title, description, fields, components, thumbnail, ephemeral } = data;
         // if (!message) {}
 
-
         const embed = new EmbedBuilder();
+        embed.setColor(this.NormalEmbedColor as ColorResolvable);
+        embed.setFooter({ text: `version: ${this.BotVersion}` });
+        embed.setTimestamp(new Date());
 
         if (title) {
             embed.setTitle(title);
@@ -91,10 +93,10 @@ class Bot extends Client {
         }
 
         if (interaction.deferred || interaction.replied) {
-            return await interaction.editReply({ content: "", embeds: [embed], components: components });
+            return await interaction.editReply({ content: content, embeds: [embed], components: components });
         }
 
-        return await interaction.reply({ content: "", embeds: [embed], components: components, ephemeral: ephemeral });
+        return await interaction.reply({ content: content, embeds: [embed], components: components, ephemeral: ephemeral });
     }
 
     public get BotVersion(): string {
