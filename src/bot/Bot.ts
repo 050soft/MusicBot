@@ -68,12 +68,12 @@ class Bot extends Client {
     }
 
     // Maybe convert the data argument to an interface instead of this
-    public async ReplyEmbed(interaction: Interaction, data: { content?: string, title?: string, description: string, fields?: APIEmbedField[], components?: ActionRowBuilder<MessageActionRowComponentBuilder>[], thumbnail?: string, ephemeral?: boolean }) {
+    public async ReplyEmbed(interaction: Interaction, data: { content?: string, title?: string, url?: string, description: string, fields?: APIEmbedField[], components?: ActionRowBuilder<MessageActionRowComponentBuilder>[], thumbnail?: string, author?: { name: string, iconURL?: string, url?: string }, ephemeral?: boolean }) {
         if (!interaction.isRepliable()) {
             throw new BotError(ErrorCodes.cannotReplyToInteraction, interaction.type);
         }
 
-        const { content, title, description, fields, components, thumbnail, ephemeral } = data;
+        const { content, title, url, description, fields, components, thumbnail, author, ephemeral } = data;
         // if (!message) {}
 
         const embed = new EmbedBuilder();
@@ -83,13 +83,21 @@ class Bot extends Client {
 
         if (title) {
             embed.setTitle(title);
-        }        
+
+            // Nesting this here since url cannot be set without a title
+            if (url) {
+                embed.setURL(url);
+            }
+        }       
         embed.setDescription(description);
         if (fields) {
             embed.addFields(fields);
         }
         if (thumbnail) {
             embed.setThumbnail(thumbnail);
+        }
+        if (author) {
+            embed.setAuthor(author);
         }
 
         if (interaction.deferred || interaction.replied) {
