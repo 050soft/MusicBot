@@ -14,7 +14,6 @@ import ErrorCodes from "./errors/ErrorCodes";
 import { version } from "../../package.json";
 const currentYear = new Date().getFullYear();
 
-interface Bot {}
 class Bot extends Client {
     public SlashCommands: Collection<string, ISlashCommand>;
     public CommandCooldowns: Collection<string, Collection<string, number>>;
