@@ -60,8 +60,8 @@ class Bot extends Client {
     }
 
     public Log(message: string, type?: string, ) {
-        if (this.InformativeLogging == false && (!type || type == "information") ) return;
-
+        if (!this.InformativeLogging && (!type || type == "information") ) return;
+        
         const dateString = new Date().toLocaleString();
         console.log(`${dateString} | ${type?.toUpperCase() || "INFORMATION"} - ${message}`);
     }
