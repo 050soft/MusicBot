@@ -18,7 +18,7 @@ export default <IEvent> {
 
             const now = Date.now();
             const commandCooldowns = cooldowns.get(command.data.name)
-            if (!commandCooldowns) return; // ^^ already adding above so if it doesn't exist now...
+            if (!commandCooldowns) return;
             const defaultCooldown = 1;
             const cooldownAmount = (command.cooldown ?? defaultCooldown) * 1000;
 
@@ -28,6 +28,7 @@ export default <IEvent> {
 
                 if (now < expirationTime) {
                     const expiredTimestamp = Math.round(expirationTime / 1000);
+                    // TODO -> implement!
                     //return bot.CooldownEmbed(interaction, expiredTimestamp)
                 }
             }
