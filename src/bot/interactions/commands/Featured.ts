@@ -6,12 +6,12 @@ export default <ISlashCommand> {
     async execute(interaction) {
         const track = interaction.Bot.FeaturedTrack;
         if (track) {
-            return await interaction.Bot.ReplyEmbed(interaction, { 
+            return await interaction.Bot.ReplyEmbed(interaction, {
                 description: `## Currently featured\n[${track.name}](${track.url}) by [${track.artist.name}](${track.artist.url}) from album **${track.album["#text"]}**`,
                 thumbnail: track.image[3]["#text"],
              });
         } else {
-            return await interaction.reply({ content: "There is currently no featured track" });
+            return await interaction.Bot.ErrorEmbed(interaction, "There is currently no featured track");
         }
     },
 }

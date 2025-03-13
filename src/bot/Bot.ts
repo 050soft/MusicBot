@@ -1,4 +1,17 @@
-import { ActionRowBuilder, APIEmbedField, Client, ClientOptions, Collection, ColorResolvable, EmbedBuilder, Interaction, MessageActionRowComponentBuilder, REST, Routes } from "discord.js";
+import {
+    ActionRowBuilder,
+    APIEmbedField,
+    Client,
+    ClientOptions,
+    Collection,
+    ColorResolvable,
+    EmbedBuilder,
+    Interaction,
+    MessageActionRowComponentBuilder,
+    MessageFlags,
+    REST,
+    Routes
+} from "discord.js";
 import ISlashCommand from "../interfaces/ISlashCommand";
 import { readdirSync } from "fs"
 import { join } from "path";
@@ -23,9 +36,9 @@ class Bot extends Client {
     public readonly ApplicationID: string;
     public readonly ServerID: string;
 
-    public readonly SuccessEmbedColor: string;
-    public readonly ErrorEmbedColor: string;
-    public readonly NormalEmbedColor: string;
+    public readonly SuccessEmbedColor: ColorResolvable;
+    public readonly ErrorEmbedColor: ColorResolvable;
+    public readonly NormalEmbedColor: ColorResolvable;
     public readonly DiscogsEmoji: string;
     public readonly LastfmEmoji: string;
 
@@ -42,9 +55,9 @@ class Bot extends Client {
         this.ApplicationID = config.APPLICATION.ID;
         this.ServerID = config.DEVELOPMENT.SERVER;
 
-        this.SuccessEmbedColor = config.EMBEDS.SUCCESS;
-        this.ErrorEmbedColor = config.EMBEDS.ERROR;
-        this.NormalEmbedColor = config.EMBEDS.NORMAL;
+        this.SuccessEmbedColor = config.EMBEDS.SUCCESS as ColorResolvable;
+        this.ErrorEmbedColor = config.EMBEDS.ERROR as ColorResolvable;
+        this.NormalEmbedColor = config.EMBEDS.NORMAL as ColorResolvable;
         this.DiscogsEmoji = config.EMBEDS.DISCOGS_EMOJI;
         this.LastfmEmoji = config.EMBEDS.LASTFM_EMOJI
 
@@ -104,6 +117,27 @@ class Bot extends Client {
         }
 
         return await interaction.reply({ content: content, embeds: [embed], components: components, ephemeral: ephemeral });
+    }
+
+    public async ErrorEmbed(interaction: Interaction, errormessage: string, ephemeral?: boolean) {
+        if (!interaction.isRepliable()) return false;
+
+        const embed = new EmbedBuilder();
+        embed.setTitle("Oops - An error occurred!");
+        embed.setDescription(errormessage);
+        embed.setColor(this.ErrorEmbedColor);
+        embed.setFooter({ text: `version: ${this.BotVersion}` });
+        embed.setTimestamp();
+
+        if (interaction.deferred || interaction.replied) {
+            return await interaction.editReply({ content: "", embeds: [embed], components: [] });
+        }
+
+        if (ephemeral) {
+            return await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
+        }
+
+        return await interaction.reply({ embeds: [embed] });
     }
 
     public get BotVersion(): string {
