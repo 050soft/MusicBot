@@ -18,7 +18,5 @@ export default <ISlashCommand> {
             description: `**${track.name}** - **${track.artist.name}** on **${track.album["#text"]}**\n\n-# ${nowPlaying["@attr"].user} has ${nowPlaying["@attr"].total} plays in total`,
             thumbnail: track.image[3]["#text"],
         });
-
-        //return await interaction.editReply({ content: `You are currently listening to **${nowPlaying.track[0].name}** by **${nowPlaying.track[0].artist.name}**!\n-# This information was retrieved from your connected Last.fm account (${authData.user})`});
     },
 }
