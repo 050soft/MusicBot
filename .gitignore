@@ -1,11 +1,16 @@
+# Env
 .env
 .env.development.local
 .env.test.local
 .env.production.local
 .env.local
+
+# Node/NPM
 build/
 node_modules
 package-lock.json
+
+# Code Editors
 .vs
 .vscode
 .idea
