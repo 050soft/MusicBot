@@ -11,7 +11,7 @@ export default <ISlashCommand> {
                 thumbnail: track.image[3]["#text"],
              });
         } else {
-            return await interaction.Bot.ErrorEmbed(interaction, "There seems to be no featured track.");
+            return await interaction.Bot.ReplyEmbed(interaction, { description: "There seems to be no featured track." });
         }
     },
 }
