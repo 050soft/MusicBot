@@ -34,7 +34,7 @@ class LastfmAuthManager {
             const session = await this.GetSession(user.id, authToken);
             if (session) {
                 try {
-                    await user.send({ content: `You've succesfully logged in with Last.fm as **${session.LastfmUser}**`});
+                    await user.send({ content: `You've successfully logged in with Last.fm as **${session.LastfmUser}**`});
                 } catch {}
                 
                 this.CurrentlyAuthenticating.delete(user);
@@ -110,8 +110,7 @@ class LastfmAuthManager {
  
         this.CurrentlyAuthenticating.set(user, token);
 
-        const url = `${this.AuthURL}&token=${token}`;
-        return url;
+        return `${this.AuthURL}&token=${token}`;
     }
 
     // TODO -> custom errors?

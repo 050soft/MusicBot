@@ -1,7 +1,6 @@
 import "dotenv/config";
 import { GatewayIntentBits } from "discord.js";
 import Bot from "./bot/Bot";
-import config from "./config.json";
 
 // Make some small changes to discord JS
 declare module "discord.js" {

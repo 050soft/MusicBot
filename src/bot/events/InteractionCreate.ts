@@ -45,9 +45,9 @@ export default <IEvent> {
 
                 if (error instanceof MongoError) {
                     if (interaction.replied || interaction.deferred) {
-                        return await interaction.editReply({ content: "A database error occured", embeds: [], components: [] });
+                        return await interaction.editReply({ content: "A database error occurred", embeds: [], components: [] });
                     } else {
-                        return await interaction.reply({ content: "A database error occured", embeds: [], components: [] });
+                        return await interaction.reply({ content: "A database error occurred", embeds: [], components: [] });
                     }
                 } else if (error instanceof BotError) {
                     return await interaction.Bot.ErrorEmbed(interaction, `${error.message}`);

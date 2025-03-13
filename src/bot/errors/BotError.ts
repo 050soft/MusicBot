@@ -4,7 +4,7 @@ import ErrorMessages from "./ErrorMessages";
 function ErrorMessage(code: ErrorCodes, args?: any) {
     if (!(code in ErrorCodes)) throw new BotError(ErrorCodes.invalidErrorCode);
     const message = ErrorMessages[code];
-    if (!message) return "a Generic error occured";
+    if (!message) return "a Generic error occurred";
     if (typeof message === "function") return message([...args] as any);
     return message;
 }

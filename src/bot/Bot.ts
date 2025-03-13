@@ -209,7 +209,7 @@ class Bot extends Client {
 
             this.Log(`Successfully reloaded ${commands.length} application (/) commands.`);
         } catch (error: any) {
-            this.Log(`Error Occured: \n ${error.stack}`, "error");
+            this.Log(`Error Occurred: \n ${error.stack}`, "error");
         }
     }
 }

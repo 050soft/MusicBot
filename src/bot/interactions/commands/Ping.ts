@@ -7,6 +7,6 @@ export default <ISlashCommand> {
     cooldown: 10,
     category: Category.Information,
     async execute(interaction) {
-        interaction.reply({ content: `${interaction.Bot.ws.ping}ms` })
+        await interaction.reply({ content: `${interaction.Bot.ws.ping}ms` })
     },
 }
