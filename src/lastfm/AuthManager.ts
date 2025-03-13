@@ -124,7 +124,7 @@ class LastfmAuthManager {
             "api_key": this.API_KEY,
             "sk": sessionKey,
             "method": "user.getRecentTracks",
-            "from": from,
+            //"from": from,
             "limit": 1,
             "extended": 1,
             "user": user,
@@ -132,7 +132,7 @@ class LastfmAuthManager {
 
         const sig = this.GetSig(params);
 
-        const fullUrl = `${this.BaseURL}${path}&api_key=${this.API_KEY}&api_sig=${sig}&format=${this.Format}&limit=1&user=${user}&sk=${sessionKey}&from=${from}&extended=1`;
+        const fullUrl = `${this.BaseURL}${path}&api_key=${this.API_KEY}&api_sig=${sig}&format=${this.Format}&limit=1&user=${user}&sk=${sessionKey}&extended=1`;
         const response = await fetch(fullUrl);
         const body = await response.json();
 
