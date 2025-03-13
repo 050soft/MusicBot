@@ -50,11 +50,7 @@ export default <IEvent> {
                         return await interaction.reply({ content: "A database error occured", embeds: [], components: [] });
                     }
                 } else if (error instanceof BotError) {
-                    if (interaction.replied || interaction.deferred) {
-                        return await interaction.editReply({ content: `${error.message}\n-# Version: ${bot.BotVersion}`, embeds: [], components: [] });
-                    } else {
-                        return await interaction.reply({ content: `${error.message}\n-# Version: ${bot.BotVersion}`, embeds: [], components: [] });
-                    }
+                    return await interaction.Bot.ErrorEmbed(interaction, `${error.message}`);
                 } 
 
                 if (interaction.replied || interaction.deferred) {
