@@ -1,12 +1,15 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import Bot from "../../index";
 
 export default abstract class SlashCommand {
-    public readonly data: SlashCommandBuilder;
+    protected readonly Bot = Bot;
+
+    public readonly data: ReturnType<SlashCommandBuilder["toJSON"]>;
     // -> category?
     public readonly cooldown?: number;
     public abstract execute(interaction: ChatInputCommandInteraction): Promise<unknown>;
 
     constructor(data: SlashCommandBuilder) {
-        this.data = data;
+        this.data = data.toJSON();
     }
 }
