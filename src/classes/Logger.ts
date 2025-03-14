@@ -35,7 +35,7 @@ class Logger {
 
         const dateString = new Date().toLocaleString();
         console.log(
-            `${this.configuration[level].color}${dateString} - [${this.configuration[level].name} - ${category?.toUpperCase() ?? "GENERAL"}] - ${message}\x1b[0m`,
+            `${this.configuration[level].color}${dateString} [${this.configuration[level].name} - ${category?.toUpperCase() ?? "GENERAL"}] ${message}\x1b[0m`,
         );
     }
 }
