@@ -11,13 +11,7 @@ const bot = new Bot({
 });
 export default bot;
 
-bot.Logger.log(LogLevel.VERBOSE, "test");
-bot.Logger.log(LogLevel.DEBUG, "test");
-bot.Logger.log(LogLevel.INFO, "test");
-bot.Logger.log(LogLevel.WARN, "test");
-bot.Logger.log(LogLevel.ERROR, "test");
-
-//bot.login();
+bot.login(process.env.TOKEN);
 //bot.Start();
 
 // process.on ...
