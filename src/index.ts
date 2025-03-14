@@ -1,7 +1,6 @@
 import "dotenv/config";
 import { GatewayIntentBits } from "discord.js";
 import Bot from "./classes/Bot";
-import LogLevel from "./enums/LogLevel";
 
 const bot = new Bot({
     intents: [
