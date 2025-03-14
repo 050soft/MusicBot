@@ -1,5 +1,7 @@
 {
-    "DATABASE": {},
+    "DATABASE": {
+        "APP_NAME": "MusicBot"
+    },
     "DEVELOPMENT": {
         "DEVMODE": true,
         "SERVER": "1343934683703935026"
