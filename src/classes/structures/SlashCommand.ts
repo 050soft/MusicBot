@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import Bot from "../../index";
 
 export default abstract class SlashCommand {
-    protected readonly Bot = Bot;
+    protected readonly bot = Bot;
 
     public readonly data: ReturnType<SlashCommandBuilder["toJSON"]>;
     // -> category?

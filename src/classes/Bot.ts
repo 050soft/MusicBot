@@ -4,6 +4,7 @@ import LogLevel from "../enums/LogLevel";
 import config from "../config.json";
 
 import { version } from "../../package.json";
+import EventHandler from "./EventHandler";
 const currentYear = new Date().getFullYear();
 
 class Bot extends Client {
@@ -18,8 +19,8 @@ class Bot extends Client {
     public readonly DiscogsEmoji: string;
     public readonly LastfmEmoji: string;
 
-
-    public Logger = new Logger(LogLevel.VERBOSE);
+    public EventHandler: EventHandler;
+    public Logger: Logger;
 
     // public FeaturedTrack: Track | undefined;
 
@@ -37,7 +38,11 @@ class Bot extends Client {
         this.DiscogsEmoji = config.EMBEDS.DISCOGS_EMOJI;
         this.LastfmEmoji = config.EMBEDS.LASTFM_EMOJI
 
+        this.EventHandler = new EventHandler(this);
         this.Logger = new Logger(LogLevel.VERBOSE);
+
+
+        this.EventHandler.HandleAndLoadEvents();
     }
 
     public get BotVersion(): string {
@@ -51,7 +56,8 @@ class Bot extends Client {
 
     public async ReplyEmbed(interaction: Interaction, data: { content?: string, title?: string, url?: string, description: string, fields?: APIEmbedField[], components?: ActionRowBuilder<MessageActionRowComponentBuilder>[], thumbnail?: string, author?: { name: string, iconURL?: string, url?: string }, ephemeral?: boolean }) {
         if (!interaction.isRepliable()) {
-            throw new BotError(ErrorCodes.cannotReplyToInteraction, interaction.type);
+            return;
+            //throw new BotError(ErrorCodes.cannotReplyToInteraction, interaction.type);
         }
 
         const { content, title, url, description, fields, components, thumbnail, author, ephemeral } = data;

@@ -1,8 +1,8 @@
 import { ClientEvents } from "discord.js";
 import Bot from "../../index";
 
-export default abstract class EventHandler<Event extends keyof ClientEvents> {
-    protected readonly Bot = Bot;
+export default abstract class Event<Event extends keyof ClientEvents> {
+    protected readonly bot = Bot;
 
     public readonly name: Event;
     public readonly once?: boolean;
