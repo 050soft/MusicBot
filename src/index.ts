@@ -1,35 +1,16 @@
 import "dotenv/config";
 import { GatewayIntentBits } from "discord.js";
-import Bot from "./bot/Bot";
+import Bot from "./classes/Bot";
 
-// Make some small changes to discord JS
-declare module "discord.js" {
-    export interface ChatInputCommandInteraction {
-        Bot: Bot,
-    }
-    export interface MessageContextMenuCommandInteraction {
-        Bot: Bot,
-    }
-    export interface UserContextMenuCommandInteraction {
-        Bot: Bot,
-    }
-    export interface SelectMenuInteraction {
-        Bot: Bot,
-    }
-    export interface ButtonInteraction {
-        Bot: Bot,
-    }
-    export interface AutoCompleteInteraction {
-        Bot: Bot,
-    }
-    export interface ModalSubmitInteraction {
-        Bot: Bot,
-    }
-}
-
-new Bot({
+const bot = new Bot({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessagePolls
     ]
 });
+export default bot;
+
+bot.login(process.env.TOKEN);
+//bot.Start();
+
+// process.on ...
