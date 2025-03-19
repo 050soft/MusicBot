@@ -1,7 +1,7 @@
 import { ActivityType, Events } from "discord.js";
 import Event from "../classes/structures/Event";
 
-let weekDays = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+const weekDays = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
 
 export default class ClientReady extends Event<Events.ClientReady> {
     constructor() {
