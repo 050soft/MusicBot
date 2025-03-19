@@ -5,12 +5,11 @@ import Event from "./structures/Event";
 import ClientReady from "../events/ClientReady";
 
 export default class EventHandler {
-    private readonly EventsPath: string;
     private readonly bot: Bot;
+    private readonly EventsPath = path.join(__dirname, "..", "events");
 
     constructor(bot: Bot) {
         this.bot = bot;
-        this.EventsPath = path.join(__dirname, "..", "events");
     }
 
     public async HandleAndLoadEvents() {

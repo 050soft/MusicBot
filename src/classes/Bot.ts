@@ -5,6 +5,7 @@ import config from "../config.json";
 
 import { version } from "../../package.json";
 import EventHandler from "./EventHandler";
+import InteractionHandler from "./InteractionHandler";
 const currentYear = new Date().getFullYear();
 
 class Bot extends Client {
@@ -20,6 +21,7 @@ class Bot extends Client {
     public readonly LastfmEmoji: string;
 
     public EventHandler: EventHandler;
+    public InteractionHandler: InteractionHandler;
     public Logger: Logger;
 
     // public FeaturedTrack: Track | undefined;
@@ -39,10 +41,11 @@ class Bot extends Client {
         this.LastfmEmoji = config.EMBEDS.LASTFM_EMOJI
 
         this.EventHandler = new EventHandler(this);
+        this.InteractionHandler = new InteractionHandler(this);
         this.Logger = new Logger(LogLevel.VERBOSE);
 
-
         this.EventHandler.HandleAndLoadEvents();
+        
     }
 
     public get BotVersion(): string {
