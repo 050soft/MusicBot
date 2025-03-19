@@ -11,6 +11,7 @@ const bot = new Bot({
 export default bot;
 
 bot.login(process.env.TOKEN);
+
 //bot.Start();
 
 // process.on ...
