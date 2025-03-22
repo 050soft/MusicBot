@@ -35,13 +35,15 @@ export default class InteractionHandler {
 
     private async LoadSlashCommands() {
         const commandFiles = await this.ReadDirectory(this.SlashCommandsPath);
+        console.log(commandFiles);
 
         for (const file of commandFiles) {
-            const c = await import(`${this.SlashCommandsPath}/${file}`);
-            const command = c.default;
-            if (!(command instanceof SlashCommand)) continue;
+            const cmd = (await import(`${this.SlashCommandsPath}/${file}`)).default;
+            if (!(cmd.prototype instanceof SlashCommand)) continue;
+
+            const command = new cmd() as SlashCommand;
             this.SlashCommands.set(command.data.name, command);
-            this.bot.Logger.verbose(`(/) command found ${file}, "InteractionHandler`);
+            this.bot.Logger.verbose(`(/) command found ${file}`, "InteractionHandler");
         }
     }
 
