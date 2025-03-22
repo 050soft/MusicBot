@@ -1,7 +1,7 @@
 import { readdirSync } from "fs";
 import { join } from "path";
 import Bot from "./Bot"
-import { CacheType, Interaction, Collection } from "discord.js";
+import { CacheType, Interaction, Collection, ChatInputCommandInteraction } from "discord.js";
 import SlashCommand from "./structures/SlashCommand";
 
 export default class InteractionHandler {
@@ -45,11 +45,24 @@ export default class InteractionHandler {
         }
     }
 
+    private async HandleChatInputCommand(interaction: ChatInputCommandInteraction) {
+        const command = this.SlashCommands.get(interaction.commandName);
+        if (!command) return;
+
+        // Implement cooldowns
+
+        await command.execute(interaction);
+    }
+
     public async LoadInteractions() {
         await this.LoadSlashCommands();
         this.bot.Logger.info(`Found ${this.SlashCommands.size} (/) commands`, "InteractionHandler")
     }
 
-    public async HandleInteraction(interaction: Interaction<CacheType>) {}
+    public async HandleInteraction(interaction: Interaction<CacheType>) {
+        if (interaction.isChatInputCommand()) {
+            await this.HandleChatInputCommand(interaction);
+        }
+    }
 
 }
