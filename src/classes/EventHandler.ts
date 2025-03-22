@@ -2,7 +2,6 @@ import Bot from "./Bot";
 import path from "path";
 import { readdirSync } from "fs";
 import Event from "./structures/Event";
-import ClientReady from "../events/ClientReady";
 
 export default class EventHandler {
     private readonly bot: Bot;
