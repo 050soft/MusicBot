@@ -9,7 +9,6 @@ import InteractionHandler from "./InteractionHandler";
 import DatabaseManager from "./DatabaseManager";
 import { Track } from "../lastfm/responses/user/GetRecentTracks";
 import LastfmAuthManager from "../lastfm/AuthManager";
-const currentYear = new Date().getFullYear();
 
 class Bot extends Client {
     public readonly InformativeLogging: boolean;
@@ -66,9 +65,9 @@ class Bot extends Client {
 
     public get BotVersion(): string {
         if (this.DeveloperMode) {
-            return `${currentYear}.${version}-dev`;
+            return `${version}-dev`;
         }
-        return `${currentYear}.${version}`;
+        return `${version}`;
     }
 
     public async GetGuildCount(): Promise<number> {
