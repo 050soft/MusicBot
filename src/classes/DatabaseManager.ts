@@ -11,9 +11,13 @@ export default class DatabaseManager {
 
     public async Connect() {
         try {
-            await connect(this.URL);
+            if (this.bot.DeveloperMode) {
+                await connect(this.URL, { dbName: "dev" });
+            } else {
+                await connect(this.URL);
+            }
 
-            this.bot.Logger.info("Connected to the database", "Database")
+            this.bot.Logger.info("Connected to the database", "Database");
         } catch (err) {
             if (err instanceof MongooseError || err instanceof Error) {
                 this.bot.Logger.error(err.message, "Database");
