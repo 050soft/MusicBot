@@ -7,5 +7,8 @@ export default class InteractionCreate extends Event<Events.InteractionCreate> {
     }
 
     async execute(interaction: Interaction<CacheType>) {
+        try {
+            await this.bot.InteractionHandler.HandleInteraction(interaction);
+        } catch {}
     }
 }

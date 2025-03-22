@@ -9,7 +9,7 @@ export default class FeaturedCommand extends SlashCommand {
     }
 
     public async execute(interaction: ChatInputCommandInteraction): Promise<unknown> {
-        return;
+        return interaction.reply({ content: "test" });
         // const track = this.Bot.FeaturedTrack;
         // if (track) {
         //     return await this.Bot.ReplyEmbed(interaction, {

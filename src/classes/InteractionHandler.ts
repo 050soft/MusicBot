@@ -1,11 +1,12 @@
 import { readdirSync } from "fs";
 import { join } from "path";
 import Bot from "./Bot"
-import { CacheType, Interaction, Collection, ChatInputCommandInteraction } from "discord.js";
+import { CacheType, Interaction, Collection, ChatInputCommandInteraction, REST, Routes } from "discord.js";
 import SlashCommand from "./structures/SlashCommand";
 
 export default class InteractionHandler {
     private readonly bot: Bot;
+    private rest = new REST({ version: "10"}).setToken(process.env.TOKEN as string);
     
     private readonly InteractionsPath = join(__dirname, "..", "interactions");
     private readonly CommandsPath = join(this.InteractionsPath, "commands");
@@ -43,6 +44,23 @@ export default class InteractionHandler {
             this.SlashCommands.set(command.data.name, command);
             this.bot.Logger.verbose(`(/) command found ${file}`, "InteractionHandler");
         }
+        
+        const commands = this.SlashCommands.mapValues(v => v.data);
+
+        try {
+            if (this.bot.DeveloperMode) {
+                await this.rest.put(Routes.applicationGuildCommands(this.bot.ApplicationID, this.bot.ServerID), { body: commands });
+            } else {
+                await this.rest.put(Routes.applicationCommands(this.bot.ApplicationID), { body: commands });
+            }
+
+            this.bot.Logger.info(`Successfully reloaded ${this.SlashCommands.size} application (/) commands.`);
+        } catch (err) {
+            if (!(err instanceof Error)) return; 
+            
+            this.bot.Logger.error(err.message, "InteractionHandler");
+            this.bot.Logger.debug(err.stack ?? "")
+        }
     }
 
     private async HandleChatInputCommand(interaction: ChatInputCommandInteraction) {
@@ -56,7 +74,7 @@ export default class InteractionHandler {
 
     public async LoadInteractions() {
         await this.LoadSlashCommands();
-        this.bot.Logger.info(`Found ${this.SlashCommands.size} (/) commands`, "InteractionHandler")
+        this.bot.Logger.info(`Found ${this.SlashCommands.size} (/) commands`, "InteractionHandler");
     }
 
     public async HandleInteraction(interaction: Interaction<CacheType>) {
