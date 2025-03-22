@@ -7,6 +7,8 @@ import { version } from "../../package.json";
 import EventHandler from "./EventHandler";
 import InteractionHandler from "./InteractionHandler";
 import DatabaseManager from "./DatabaseManager";
+import { Track } from "../lastfm/responses/user/GetRecentTracks";
+import LastfmAuthManager from "../lastfm/AuthManager";
 const currentYear = new Date().getFullYear();
 
 class Bot extends Client {
@@ -23,10 +25,12 @@ class Bot extends Client {
 
     public EventHandler: EventHandler;
     public InteractionHandler: InteractionHandler;
+    public LastFMAuthManager: LastfmAuthManager;
     public DatabaseManager: DatabaseManager;
+    
     public Logger: Logger;
 
-    // public FeaturedTrack: Track | undefined;
+    public FeaturedTrack: Track | undefined;
 
     constructor(clientOptions: ClientOptions) {
         super(clientOptions);
@@ -48,6 +52,7 @@ class Bot extends Client {
 
         this.EventHandler = new EventHandler(this);
         this.InteractionHandler = new InteractionHandler(this);
+        this.LastFMAuthManager = new LastfmAuthManager();
         this.DatabaseManager = new DatabaseManager(this);
         this.Logger = new Logger(LogLevel.VERBOSE);
 

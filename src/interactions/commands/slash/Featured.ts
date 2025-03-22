@@ -9,15 +9,14 @@ export default class FeaturedCommand extends SlashCommand {
     }
 
     public async execute(interaction: ChatInputCommandInteraction): Promise<unknown> {
-        return interaction.reply({ content: "test" });
-        // const track = this.Bot.FeaturedTrack;
-        // if (track) {
-        //     return await this.Bot.ReplyEmbed(interaction, {
-        //         description: `## Currently featured\n[${track.name}](${track.url}) by [${track.artist.name}](${track.artist.url}) from album **${track.album["#text"]}**`,
-        //         thumbnail: track.image[3]["#text"],
-        //      });
-        // } else {
-        //     return await this.Bot.ReplyEmbed(interaction, { description: "There seems to be no featured track." });
-        // }
+        const track = this.bot.FeaturedTrack;
+        if (track) {
+            return await this.bot.ReplyEmbed(interaction, {
+                description: `## Currently featured\n[${track.name}](${track.url}) by [${track.artist.name}](${track.artist.url}) from album **${track.album["#text"]}**`,
+                thumbnail: track.image[3]["#text"],
+             });
+        } else {
+            return await this.bot.ReplyEmbed(interaction, { description: "There seems to be no featured track." });
+        }
     }
 }
