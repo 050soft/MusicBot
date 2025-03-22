@@ -6,6 +6,7 @@ import config from "../config.json";
 import { version } from "../../package.json";
 import EventHandler from "./EventHandler";
 import InteractionHandler from "./InteractionHandler";
+import DatabaseManager from "./DatabaseManager";
 const currentYear = new Date().getFullYear();
 
 class Bot extends Client {
@@ -22,6 +23,7 @@ class Bot extends Client {
 
     public EventHandler: EventHandler;
     public InteractionHandler: InteractionHandler;
+    public DatabaseManager: DatabaseManager;
     public Logger: Logger;
 
     // public FeaturedTrack: Track | undefined;
@@ -42,9 +44,12 @@ class Bot extends Client {
 
         this.EventHandler = new EventHandler(this);
         this.InteractionHandler = new InteractionHandler(this);
+        this.DatabaseManager = new DatabaseManager(this);
         this.Logger = new Logger(LogLevel.VERBOSE);
 
         this.EventHandler.HandleAndLoadEvents();
+        this.InteractionHandler.LoadInteractions();
+        this.DatabaseManager.Connect();
         
     }
 
