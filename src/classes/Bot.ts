@@ -65,6 +65,9 @@ class Bot extends Client {
     }
 
     public get BotVersion(): string {
+        if (this.DeveloperMode) {
+            return `${currentYear}.${version}-dev`;
+        }
         return `${currentYear}.${version}`;
     }
 
