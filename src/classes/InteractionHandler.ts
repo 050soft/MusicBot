@@ -11,7 +11,6 @@ export default class InteractionHandler {
     private readonly CommandsPath = join(this.InteractionsPath, "commands");
     private readonly SlashCommandsPath = join(this.CommandsPath, "slash");
     private readonly MessageCommandsPath = join(this.CommandsPath, "message");
-    // private readonly WhateverPath = join(this.InteractionsPath, "commands");
 
     public SlashCommands = new Collection<string, SlashCommand>
 
@@ -50,6 +49,7 @@ export default class InteractionHandler {
         await this.LoadSlashCommands();
         this.bot.Logger.info(`Found ${this.SlashCommands.size} (/) commands`, "InteractionHandler")
     }
+
     public async HandleInteraction(interaction: Interaction<CacheType>) {}
 
 }
