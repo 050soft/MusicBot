@@ -35,7 +35,6 @@ export default class InteractionHandler {
 
     private async LoadSlashCommands() {
         const commandFiles = await this.ReadDirectory(this.SlashCommandsPath);
-        console.log(commandFiles);
 
         for (const file of commandFiles) {
             const cmd = (await import(`${this.SlashCommandsPath}/${file}`)).default;
