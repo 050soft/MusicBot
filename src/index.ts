@@ -14,7 +14,6 @@ bot.login(process.env.TOKEN);
 
 //bot.Start();
 
-// process.on ...
 process.on("uncaughtException", err => {
     bot.Logger.error(err.message);
     bot.Logger.debug(err.stack ?? "");
