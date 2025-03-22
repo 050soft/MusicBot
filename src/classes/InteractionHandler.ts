@@ -1,20 +1,25 @@
 import { readdirSync } from "fs";
 import { join } from "path";
 import Bot from "./Bot"
-import { CacheType, Interaction } from "discord.js";
+import { CacheType, Interaction, Collection } from "discord.js";
+import SlashCommand from "./structures/SlashCommand";
 
 export default class InteractionHandler {
     private readonly bot: Bot;
     
     private readonly InteractionsPath = join(__dirname, "..", "interactions");
     private readonly CommandsPath = join(this.InteractionsPath, "commands");
+    private readonly SlashCommandsPath = join(this.CommandsPath, "slash");
+    private readonly MessageCommandsPath = join(this.CommandsPath, "message");
     // private readonly WhateverPath = join(this.InteractionsPath, "commands");
+
+    public SlashCommands = new Collection<string, SlashCommand>
 
     constructor(bot: Bot) {
         this.bot = bot;
     }
 
-    public async ReadDirectory(directory: string, onlyJS: boolean = true): Promise<string[]> {
+    private async ReadDirectory(directory: string, onlyJS: boolean = true): Promise<string[]> {
         let files: string[] = [];
 
         try {
@@ -28,7 +33,22 @@ export default class InteractionHandler {
         return files;
     }
 
-    public async LoadInteractions() {}
+    private async LoadSlashCommands() {
+        const commandFiles = await this.ReadDirectory(this.SlashCommandsPath);
+
+        for (const file of commandFiles) {
+            const c = await import(`${this.SlashCommandsPath}/${file}`);
+            const command = c.default;
+            if (!(command instanceof SlashCommand)) continue;
+            this.SlashCommands.set(command.data.name, command);
+            this.bot.Logger.verbose(`(/) command found ${file}, "InteractionHandler`);
+        }
+    }
+
+    public async LoadInteractions() {
+        await this.LoadSlashCommands();
+        this.bot.Logger.info(`Found ${this.SlashCommands.size} (/) commands`, "InteractionHandler")
+    }
     public async HandleInteraction(interaction: Interaction<CacheType>) {}
 
 }
