@@ -33,7 +33,11 @@ class Bot extends Client {
 
         this.InformativeLogging = config.APPLICATION.INFORMATIVE_LOGGING;
         this.DeveloperMode = config.DEVELOPMENT.DEVMODE;
-        this.ApplicationID = config.APPLICATION.ID;
+        if (this.DeveloperMode) {
+            this.ApplicationID = config.DEVELOPMENT.APP_ID;
+        } else {
+            this.ApplicationID = config.APPLICATION.ID
+        }
         this.ServerID = config.DEVELOPMENT.SERVER;
 
         this.SuccessEmbedColor = config.EMBEDS.SUCCESS as ColorResolvable;
@@ -46,6 +50,8 @@ class Bot extends Client {
         this.InteractionHandler = new InteractionHandler(this);
         this.DatabaseManager = new DatabaseManager(this);
         this.Logger = new Logger(LogLevel.VERBOSE);
+
+        this.Logger.info(`Development mode is set to ${this.DeveloperMode}`);
 
         this.EventHandler.HandleAndLoadEvents();
         this.InteractionHandler.LoadInteractions();
