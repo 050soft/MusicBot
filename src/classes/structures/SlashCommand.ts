@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import Bot from "../../index";
 
 export default abstract class SlashCommand {
@@ -8,6 +8,7 @@ export default abstract class SlashCommand {
     // -> category?
     public readonly cooldown?: number;
     public abstract execute(interaction: ChatInputCommandInteraction): Promise<unknown>;
+    public autocomplete?(interaction: AutocompleteInteraction): Promise<unknown>;
 
     constructor(data: SlashCommandBuilder) {
         this.data = data.toJSON();

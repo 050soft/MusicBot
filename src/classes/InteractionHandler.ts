@@ -1,7 +1,7 @@
 import { readdirSync } from "fs";
 import { join } from "path";
 import Bot from "./Bot"
-import { CacheType, Interaction, Collection, ChatInputCommandInteraction, REST, Routes } from "discord.js";
+import { CacheType, Interaction, Collection, ChatInputCommandInteraction, REST, Routes, AutocompleteInteraction } from "discord.js";
 import SlashCommand from "./structures/SlashCommand";
 
 export default class InteractionHandler {
@@ -72,6 +72,14 @@ export default class InteractionHandler {
         await command.execute(interaction);
     }
 
+    private async HandleAutocomplete(interaction: AutocompleteInteraction) {
+        const command = this.SlashCommands.get(interaction.commandName);
+        if (!command) return;
+        if (!command.autocomplete) return;
+        
+        await command.autocomplete(interaction);
+    }
+
     public async LoadInteractions() {
         await this.LoadSlashCommands();
         this.bot.Logger.info(`Found ${this.SlashCommands.size} (/) commands`, "InteractionHandler");
@@ -80,6 +88,8 @@ export default class InteractionHandler {
     public async HandleInteraction(interaction: Interaction<CacheType>) {
         if (interaction.isChatInputCommand()) {
             await this.HandleChatInputCommand(interaction);
+        } else if (interaction.isAutocomplete()) {
+            await this.HandleAutocomplete(interaction)
         }
     }
 
