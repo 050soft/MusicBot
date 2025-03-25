@@ -41,7 +41,7 @@ export default class Manager {
     /**
      * 
      * @param params Array of keys with a value
-     * @returns The URL to get
+     * @returns The URL with a valid signature and all parameters applied
      */
     public GetUrl(params: { [key: string]: any }) {
         const requestParams: { [key: string]: any } = { ...params, api_key: this.API_KEY };
