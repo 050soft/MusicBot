@@ -16,6 +16,7 @@ export default class Manager {
     public readonly BaseURL = "http://ws.audioscrobbler.com/2.0?method=";
     public readonly Format = "json";
 
+    // todo -> delete bot since it's not needed and makes the entire thing dependent on the bot. (cant be ported to standalone package like this)
     public readonly bot: Bot;
 
     constructor(bot: Bot) {
