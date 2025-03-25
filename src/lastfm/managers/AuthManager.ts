@@ -10,13 +10,13 @@ export default class AuthManager extends Manager {
     }
 
     public async GetToken() {
-        const method = "gettoken";
+        const method = Methods.AuthGetToken;
 
         const params = {
             "api_key": this.API_KEY,
             "method": method,
         };
-
-        return await this.Request<Methods.AuthGetToken>(this.GetUrl(params));
+    
+        return await this.Request<typeof method>(this.GetUrl(params));
     }
 }
