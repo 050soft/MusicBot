@@ -1,1 +1,2 @@
-THIS SHOULD BE IT'S OWN NPM PACKAGE OR SOMETHING LIKE THAT.
+## Note
+Currently I (not_h3) am trying to write this in a way that it *can* be ported to its own standalone npm package. However, for now it will stay as integrated part of MusicBot, until there are enough requests to make it a standalone package.
