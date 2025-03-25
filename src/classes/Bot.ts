@@ -60,7 +60,6 @@ class Bot extends Client {
         this.EventHandler.HandleAndLoadEvents();
         this.InteractionHandler.LoadInteractions();
         this.DatabaseManager.Connect();
-        
     }
 
     public get BotVersion(): string {
