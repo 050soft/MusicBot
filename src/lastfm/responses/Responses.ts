@@ -1,6 +1,9 @@
+import GetSession from "./auth/GetSession";
+import GetToken from "./auth/GetToken";
 import { APIError } from "./ErrorResponse";
 
 import Methods from "./Methods";
+import GetRecentTracks from "./user/GetRecentTracks";
 
 export default interface Responses {
     [Methods.Error]: APIError;
@@ -24,8 +27,8 @@ export default interface Responses {
     [Methods.ArtistSearch]: any;
 
     [Methods.AuthGetMobileSession]: any;
-    [Methods.AuthGetSession]: any;
-    [Methods.AuthGetToken]: any;
+    [Methods.AuthGetSession]: GetSession;
+    [Methods.AuthGetToken]: GetToken;
 
     [Methods.ChartGetTopArtists]: any;
     [Methods.ChartGetTopTags]: any;
@@ -61,7 +64,7 @@ export default interface Responses {
     [Methods.UserGetInfo]: any;
     [Methods.UserGetLovedTracks]: any;
     [Methods.UserGetPersonalTags]: any;
-    [Methods.UserGetRecentTracks]: any;
+    [Methods.UserGetRecentTracks]: GetRecentTracks;
     [Methods.UserGetTopAlbums]: any;
     [Methods.UserGetTopArtists]: any;
     [Methods.UserGetTopTags]: any;
