@@ -138,7 +138,7 @@ class LastfmAuthManager {
 
         if (body.message && body.error) {
             const error: ErrorResponse = body;
-            throw new Error(`LastFM api error, message: ${error.message}, code: ${error.error}`)
+            //throw new Error(`LastFM api error, message: ${error.message}, code: ${error.error}`)
         }
 
         if (!body.recenttracks) throw new BotError(ErrorCodes.cannotGetCurrentlyPlaying);
