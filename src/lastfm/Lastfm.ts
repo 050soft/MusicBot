@@ -7,7 +7,6 @@ import LibraryManager from "./managers/LibraryManager";
 import TagManager from "./managers/TagManager";
 import TrackManager from "./managers/TrackManager";
 import UserManager from "./managers/UserManager";
-import Bot from "../classes/Bot";
 
 export default class Lastfm {
     public Album: AlbumManager;
@@ -20,15 +19,15 @@ export default class Lastfm {
     public Track: TrackManager;
     public User: UserManager;
 
-    constructor(bot: Bot) {
-        this.Album = new AlbumManager(bot);
-        this.Artist = new ArtistManager(bot);
-        this.Auth = new AuthManager(bot);
-        this.Chart = new ChartManager(bot);
-        this.Geo = new GeoManager(bot);
-        this.Library = new LibraryManager(bot);
-        this.Tag = new TagManager(bot);
-        this.Track = new TrackManager(bot);
-        this.User = new UserManager(bot);
+    constructor() {
+        this.Album = new AlbumManager();
+        this.Artist = new ArtistManager();
+        this.Auth = new AuthManager();
+        this.Chart = new ChartManager();
+        this.Geo = new GeoManager();
+        this.Library = new LibraryManager();
+        this.Tag = new TagManager();
+        this.Track = new TrackManager();
+        this.User = new UserManager();
     }
 }

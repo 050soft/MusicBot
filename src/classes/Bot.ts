@@ -8,7 +8,7 @@ import EventHandler from "./EventHandler";
 import InteractionHandler from "./InteractionHandler";
 import DatabaseManager from "./DatabaseManager";
 import { Track } from "../lastfm/responses/user/GetRecentTracks";
-import LastfmAuthManager from "../lastfm/AuthManager";
+import Lastfm from "../lastfm/Lastfm";
 
 class Bot extends Client {
     public readonly InformativeLogging: boolean;
@@ -24,7 +24,7 @@ class Bot extends Client {
 
     public EventHandler: EventHandler;
     public InteractionHandler: InteractionHandler;
-    public LastFMAuthManager: LastfmAuthManager;
+    public LastfmManager: Lastfm;
     public DatabaseManager: DatabaseManager;
     
     public Logger: Logger;
@@ -51,7 +51,7 @@ class Bot extends Client {
 
         this.EventHandler = new EventHandler(this);
         this.InteractionHandler = new InteractionHandler(this);
-        this.LastFMAuthManager = new LastfmAuthManager();
+        this.LastfmManager = new Lastfm();
         this.DatabaseManager = new DatabaseManager(this);
         this.Logger = new Logger(LogLevel.VERBOSE);
 

@@ -14,10 +14,12 @@ export default class ClientReady extends Event<Events.ClientReady> {
 
         const getTrack = async () => {
             const user = "436950036098842645";
-            const authdata = await this.bot.LastFMAuthManager.GetAuthData(user);
+            const authdata = await this.bot.DatabaseManager.GetAuthData(user);
             if (!authdata) return;
-            const np = await this.bot.LastFMAuthManager.GetNowPlaying(authdata.sk, authdata.user);
-            if (np) {
+            const response = await this.bot.LastfmManager.User.GetNowPlaying(authdata);
+            if (response.IsError()) return;
+            if (response && response.data.recenttracks) {
+                const np = response.data.recenttracks;
                 const trackName = np.track[0].name;
                 const trackArtist = np.track[0].artist.name;
                 this.bot.FeaturedTrack = np.track[0];

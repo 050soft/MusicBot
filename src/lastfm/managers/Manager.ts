@@ -1,6 +1,5 @@
 import md5 from "md5";
 import fetch from "node-fetch";
-import UserDB from "../../models/UserDB";
 import Bot from "../../classes/Bot";
 import ErrorResponse, { APIError } from "../responses/ErrorResponse";
 import Response from "../responses/APIResponse";
@@ -15,13 +14,6 @@ export default class Manager {
 
     public readonly BaseURL = "http://ws.audioscrobbler.com/2.0?method=";
     public readonly Format = "json";
-
-    // todo -> delete bot since it's not needed and makes the entire thing dependent on the bot. (cant be ported to standalone package like this)
-    public readonly bot: Bot;
-
-    constructor(bot: Bot) {
-        this.bot = bot;
-    }
 
     private GenerateSignature(params: { [key: string]: any }) {
         const paramStr = Object.keys(params)
@@ -50,18 +42,6 @@ export default class Manager {
         requestParams["api_sig"] = signature;
         const query = new URLSearchParams(requestParams).toString();
         return `${this.BaseURL}?${query}`;
-    }
-
-    /**
-     * 
-     * @param userID The userid of the user to find the authentication data for
-     * @returns Nothing if not found, auth data if found
-     */
-    public async GetAuthData(userID: string): Promise<undefined | { user: string, sk: string }> {
-        const userData = await UserDB.findOne({ DiscordId: userID });
-        if (!userData || !userData.LastfmUser || !userData.LastfmSK) return;
-
-        return { user: userData.LastfmUser, sk: userData.LastfmSK };
     }
 
     public async Request<T extends keyof Responses>(url: string) {

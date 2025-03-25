@@ -22,7 +22,7 @@ export default class LoginCommand extends SlashCommand {
                 if (selection.values[0] == "discogs") {
                     return await interaction.editReply({ content: "Logging in with Discogs is not supported yet!", components: [] });
                 } else if (selection.values[0] == "lastfm") {
-                    const url = await this.bot.LastFMAuthManager.GetUrl(interaction.user);
+                    const url = await this.bot.LastfmManager.Auth.GetAuthUrl();
                     return await interaction.editReply({ content: `Click [here](${url}) to login with Last.fm!`, components: [] });
                 } else {
                     return
