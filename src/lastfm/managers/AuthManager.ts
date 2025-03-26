@@ -34,6 +34,6 @@ export default class AuthManager extends Manager {
     public async GetAuthUrl() {
         const token = await this.GetToken();
         if (!token || token.IsError()) return console.error(token.data);
-        return `${this.AuthURL}&token=${token.data.token}`;
+        return { url: `${this.AuthURL}&token=${token.data.token}`, token: token.data.token };
     }
 }

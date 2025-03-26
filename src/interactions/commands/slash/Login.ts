@@ -24,7 +24,8 @@ export default class LoginCommand extends SlashCommand {
                 } else if (selection.values[0] == "lastfm") {
                     const url = await this.bot.LastfmManager.Auth.GetAuthUrl();
                     if (!url) return; // reply
-                    return await interaction.editReply({ content: `Click [here](${url}) to login with Last.fm!`, components: [] });
+                    this.bot.SetCurrentlyAuthenticating(interaction.user.id, url.token);
+                    return await interaction.editReply({ content: `Click [here](${url.url}) to login with Last.fm!`, components: [] });
                 } else {
                     return
                 }
