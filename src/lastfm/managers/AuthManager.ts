@@ -1,5 +1,3 @@
-import { User } from "discord.js";
-import Bot from "../../classes/Bot";
 import Methods from "../responses/Methods";
 import Manager from "./Manager";
 
@@ -35,7 +33,7 @@ export default class AuthManager extends Manager {
 
     public async GetAuthUrl() {
         const token = await this.GetToken();
-        if (!token || token.IsError()) return;
-        return `${this.AuthURL}&token=${token}`;
+        if (!token || token.IsError()) return console.error(token.data);
+        return `${this.AuthURL}&token=${token.data.token}`;
     }
 }

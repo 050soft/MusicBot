@@ -33,4 +33,21 @@ export default class DatabaseManager {
 
         return { user: userData.LastfmUser, sk: userData.LastfmSK };
     }
+
+    public async SetAuthData(userID: string, authData: { user: string, sk: string }) {
+        let userData = await UserDB.findOne({ DiscordId: userID });
+        if (!userData) {
+            userData = new UserDB({
+                DiscordId: userID,
+                LastfmUser: authData.user,
+                LastfmSK: authData.sk,
+            });
+        } else {
+            userData.LastfmUser = authData.user;
+            userData.LastfmSK = authData.sk;
+        }
+
+        await userData.save();
+        return userData;
+    }
 }

@@ -12,7 +12,7 @@ export default class Manager {
     public readonly API_KEY = process.env.LASTFM_API_KEY as string;
     public readonly SHARED_SECRET = process.env.LASTFM_SHARED_SECRET as string;
 
-    public readonly BaseURL = "http://ws.audioscrobbler.com/2.0?method=";
+    public readonly BaseURL = "http://ws.audioscrobbler.com/2.0";
     public readonly Format = "json";
 
     private GenerateSignature(params: { [key: string]: any }) {
@@ -40,6 +40,7 @@ export default class Manager {
         const requestParams: { [key: string]: any } = { ...params, api_key: this.API_KEY };
         const signature = this.GenerateSignature(requestParams);
         requestParams["api_sig"] = signature;
+        requestParams["format"] = this.Format;
         const query = new URLSearchParams(requestParams).toString();
         return `${this.BaseURL}?${query}`;
     }

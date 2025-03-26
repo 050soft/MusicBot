@@ -1,4 +1,4 @@
-import { ActionRowBuilder, APIEmbedField, Client, ClientOptions, ColorResolvable, EmbedBuilder, Interaction, MessageActionRowComponentBuilder } from "discord.js";
+import { ActionRowBuilder, APIEmbedField, Client, ClientOptions, Collection, ColorResolvable, EmbedBuilder, Interaction, MessageActionRowComponentBuilder } from "discord.js";
 import Logger from "./Logger";
 import LogLevel from "../enums/LogLevel";
 import config from "../config.json";
@@ -31,6 +31,8 @@ class Bot extends Client {
 
     public FeaturedTrack: Track | undefined;
 
+    private CurrentlyAuthenticating: Collection<string, { token: string, startedOn: number }>;
+
     constructor(clientOptions: ClientOptions) {
         super(clientOptions);
 
@@ -55,11 +57,45 @@ class Bot extends Client {
         this.DatabaseManager = new DatabaseManager(this);
         this.Logger = new Logger(LogLevel.VERBOSE);
 
+        this.CurrentlyAuthenticating = new Collection();
+
         this.Logger.info(`Development mode is set to ${this.DeveloperMode}`);
 
         this.EventHandler.HandleAndLoadEvents();
         this.InteractionHandler.LoadInteractions();
         this.DatabaseManager.Connect();
+
+        // Loops the function
+        setInterval(async () => {
+            this.CheckCurrentlyAuthenticating();
+        }, 30_000);
+    }
+
+    private async CheckCurrentlyAuthenticating() {
+        const allUsers = this.CurrentlyAuthenticating.entries();
+        const now = Math.round(new Date().getTime() / 1000);
+        for (const [user, authData] of allUsers) {
+            if ((now - authData.startedOn) >= 3_600) {
+                // It's been 60 minutes; token expired.
+                this.CurrentlyAuthenticating.delete(user);
+                // Maybe send user a DM
+                continue;
+            }
+
+            const session = await this.LastfmManager.Auth.GetSession(authData.token);
+            if (session.IsError()) {
+                continue;
+            }
+
+            if (!session.data.session.key || !session.data.session.name) continue;
+
+            await this.DatabaseManager.SetAuthData(user, { user: session.data.session.name, sk: session.data.session.key });
+            try {
+                const userObj = await this.users.fetch(user);
+                await userObj.send({ content: `You've successfully logged in with Last.fm as **${session.data.session.name}**`});
+            } catch {}
+            this.CurrentlyAuthenticating.delete(user);
+        }
     }
 
     public get BotVersion(): string {
@@ -72,6 +108,10 @@ class Bot extends Client {
     public async GetGuildCount(): Promise<number> {
         // !! when starting to use shards use the shard-wide counting method
         return this.guilds.cache.size;
+    }
+
+    public async SetCurrentlyAuthenticating(userID: string, token: string) {
+        return this.CurrentlyAuthenticating.set(userID, { token: token, startedOn: Math.round(new Date().getTime() / 1000) });
     }
 
     public async ReplyEmbed(interaction: Interaction, data: { content?: string, title?: string, url?: string, description: string, fields?: APIEmbedField[], components?: ActionRowBuilder<MessageActionRowComponentBuilder>[], thumbnail?: string, author?: { name: string, iconURL?: string, url?: string }, ephemeral?: boolean }) {
