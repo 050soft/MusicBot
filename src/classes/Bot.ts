@@ -1,4 +1,4 @@
-import { ActionRowBuilder, APIEmbedField, Client, ClientOptions, Collection, ColorResolvable, EmbedBuilder, Interaction, MessageActionRowComponentBuilder } from "discord.js";
+import { ActionRowBuilder, APIEmbedField, Client, ClientOptions, Collection, ColorResolvable, EmbedBuilder, Interaction, MessageActionRowComponentBuilder, MessageFlags } from "discord.js";
 import Logger from "./Logger";
 import LogLevel from "../enums/LogLevel";
 import config from "../config.json";
@@ -151,7 +151,12 @@ class Bot extends Client {
             return await interaction.editReply({ content: content, embeds: [embed], components: components });
         }
 
-        return await interaction.reply({ content: content, embeds: [embed], components: components, ephemeral: ephemeral });
+        const flags: MessageFlags.Ephemeral[] = [];
+        if (ephemeral) {
+            flags.push(MessageFlags.Ephemeral);
+        }
+
+        return await interaction.reply({ content: content, embeds: [embed], components: components, flags: flags });
     }
 }
 
