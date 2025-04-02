@@ -18,7 +18,7 @@ export default class EventHandler {
             const event = e.default;
             if (!(event.prototype instanceof Event)) continue;
 
-            const constructedEvent = new event();
+            const constructedEvent: Event<any> = new event();
             if (constructedEvent.once) {
                 this.bot.once(constructedEvent.name, (...args) => constructedEvent.execute(...args));
             } else {
