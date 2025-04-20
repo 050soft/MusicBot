@@ -1,13 +1,15 @@
 {
   "name": "musicbot",
   "version": "0.2.1",
+  "version_tag": "pre-alpha",
   "description": "A Discord music bot that features Last.fm and Discogs integration.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc --diagnostics",
-    "prestart": "tsc --diagnostics",
+    "build": "tsc --diagnostics && node scripts/version.js",
+    "prestart": "tsc --diagnostics && node scripts/version.js",
     "start": "node build/src/index.js",
     "start:dev": "npm run start",
+    "postversion": "node scripts/version.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

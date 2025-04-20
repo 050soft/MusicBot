@@ -3,7 +3,7 @@ import Logger from "./Logger";
 import LogLevel from "../enums/LogLevel";
 import config from "../config.json";
 
-import { version } from "../../package.json";
+import { version, commit_id } from "../version";
 import EventHandler from "./EventHandler";
 import InteractionHandler from "./InteractionHandler";
 import DatabaseManager from "./DatabaseManager";
@@ -103,6 +103,10 @@ class Bot extends Client {
             return `${version}-dev`;
         }
         return `${version}`;
+    }
+
+    public get CommitId(): string {
+        return `${commit_id}`;
     }
 
     public async GetGuildCount(): Promise<number> {
