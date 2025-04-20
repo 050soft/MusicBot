@@ -129,7 +129,7 @@ class Bot extends Client {
 
         const embed = new EmbedBuilder();
         embed.setColor(this.NormalEmbedColor as ColorResolvable);
-        embed.setFooter({ text: `version: ${this.BotVersion}` });
+        embed.setFooter({ text: `version: ${this.BotVersion} • commit: ${this.CommitId}` });
         embed.setTimestamp(new Date());
 
         if (title) {
