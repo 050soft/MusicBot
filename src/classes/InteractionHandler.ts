@@ -54,7 +54,7 @@ export default class InteractionHandler {
                 await this.rest.put(Routes.applicationCommands(this.bot.ApplicationID), { body: commands });
             }
 
-            this.bot.Logger.info(`Successfully reloaded ${this.SlashCommands.size} application (/) commands.`);
+            this.bot.Logger.info(`Successfully reloaded ${this.SlashCommands.size} application (/) commands`);
         } catch (err) {
             if (!(err instanceof Error)) return; 
             
