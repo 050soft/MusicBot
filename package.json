@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc --diagnostics && node scripts/version.js",
     "prestart": "tsc --diagnostics && node scripts/version.js",
-    "start": "node build/src/index.js",
+    "start": "node build/index.js",
     "start:dev": "npm run start",
     "postversion": "node scripts/version.js",
     "test": "echo \"Error: no test specified\" && exit 1"
