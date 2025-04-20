@@ -21,7 +21,7 @@ if (tag) {
     fullVersion = `${Year}.${version}`;
 }
 console.log(`> Full version: ${fullVersion}`);
-const writeString = `export const version = "${fullVersion}"; export const commit_id = "${COMMIT_ID}";`;
+const writeString = `const version = "${fullVersion}"; const commit_id = "${COMMIT_ID}"; module.exports = { version, commit_id };`;
 const outfile = "/build/version.js";
 console.log(`Writing version to ${outfile}...`);
 fs.writeFile(`.${outfile}`, writeString, { encoding: "utf-8" }, err => {
