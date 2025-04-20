@@ -50,4 +50,13 @@ export default class DatabaseManager {
         await userData.save();
         return userData;
     }
+    public async DeleteAuthData(userID: string) {
+        const data = await UserDB.findOne({ DiscordId: userID });
+        if (!data) return;
+
+        data.LastfmUser = null;
+        data.LastfmSK = null;
+        await data.save();
+        return;
+    }
 }
