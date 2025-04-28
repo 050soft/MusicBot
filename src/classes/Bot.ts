@@ -118,19 +118,23 @@ class Bot extends Client {
         return this.CurrentlyAuthenticating.set(userID, { token: token, startedOn: Math.round(new Date().getTime() / 1000) });
     }
 
-    public async ReplyEmbed(interaction: Interaction, data: { content?: string, title?: string, url?: string, description: string, fields?: APIEmbedField[], components?: ActionRowBuilder<MessageActionRowComponentBuilder>[], thumbnail?: string, author?: { name: string, iconURL?: string, url?: string }, ephemeral?: boolean }) {
+    public async ReplyEmbed(interaction: Interaction, data: { content?: string, title?: string, url?: string, description: string, fields?: APIEmbedField[], components?: ActionRowBuilder<MessageActionRowComponentBuilder>[], thumbnail?: string, author?: { name: string, iconURL?: string, url?: string }, unixTime?: string, ephemeral?: boolean }) {
         if (!interaction.isRepliable()) {
             return;
             //throw new BotError(ErrorCodes.cannotReplyToInteraction, interaction.type);
         }
 
-        const { content, title, url, description, fields, components, thumbnail, author, ephemeral } = data;
+        const { content, title, url, description, fields, components, thumbnail, author, unixTime, ephemeral } = data;
         // if (!message) {}
 
         const embed = new EmbedBuilder();
         embed.setColor(this.NormalEmbedColor as ColorResolvable);
-        embed.setFooter({ text: `version: ${this.BotVersion} • commit: ${this.CommitId}` });
-        embed.setTimestamp(new Date());
+        embed.setFooter({ text: `v${this.BotVersion} • commit: ${this.CommitId}` });
+        if (unixTime) {
+            embed.setTimestamp(new Date(unixTime));
+        } else {
+            embed.setTimestamp(new Date());
+        }
 
         if (title) {
             embed.setTitle(title);

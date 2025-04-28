@@ -33,6 +33,7 @@ export default class PlayingCommand extends SlashCommand {
             title: "Most Recently played",
             description: `**${track.name}** - **${track.artist.name}** on **${track.album["#text"]}**\n\n-# ${np["@attr"].user} has ${np["@attr"].total} plays in total`,
             thumbnail: track.image[3]["#text"],
+            unixTime: track.date?.["#text"]
         });
     }
 }
