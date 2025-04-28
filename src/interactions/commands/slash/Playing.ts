@@ -16,10 +16,21 @@ export default class PlayingCommand extends SlashCommand {
         const nowPlaying = await this.bot.LastfmManager.User.GetNowPlaying(authData); 
         if (nowPlaying.IsError()) return await this.bot.ReplyEmbed(interaction, { description: "I was unable to find what you are listening to" });
         const np = nowPlaying.data.recenttracks;
-
         const track: Track = np.track[0];
+        if (!track) {
+            return await this.bot.ReplyEmbed(interaction, { description: "I was unable to find what you are listening to" });
+        }
+
+        if (track["@attr"]?.nowplaying) {
+            return await this.bot.ReplyEmbed(interaction, {
+                title: "Now Playing",
+                description: `**${track.name}** - **${track.artist.name}** on **${track.album["#text"]}**\n\n-# ${np["@attr"].user} has ${np["@attr"].total} plays in total`,
+                thumbnail: track.image[3]["#text"],
+            }); 
+        }
+
         return await this.bot.ReplyEmbed(interaction, {
-            title: "Now Playing",
+            title: "Most Recently played",
             description: `**${track.name}** - **${track.artist.name}** on **${track.album["#text"]}**\n\n-# ${np["@attr"].user} has ${np["@attr"].total} plays in total`,
             thumbnail: track.image[3]["#text"],
         });
