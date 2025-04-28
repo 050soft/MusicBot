@@ -1,4 +1,4 @@
-import { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, SlashCommandSubcommandsOnlyBuilder } from "discord.js";
 import Bot from "../../index";
 
 export default abstract class SlashCommand {
@@ -10,7 +10,7 @@ export default abstract class SlashCommand {
     public abstract execute(interaction: ChatInputCommandInteraction): Promise<unknown>;
     public autocomplete?(interaction: AutocompleteInteraction): Promise<unknown>;
 
-    constructor(data: SlashCommandBuilder) {
+    constructor(data: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | SlashCommandOptionsOnlyBuilder) {
         this.data = data.toJSON();
     }
 }
