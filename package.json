@@ -1,6 +1,6 @@
 {
   "name": "musicbot",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "version_tag": "pre-alpha",
   "description": "A Discord music bot that features Last.fm and Discogs integration.",
   "main": "index.js",
