@@ -28,7 +28,19 @@ export default class ArtistCommand extends SlashCommand {
         super(data);
     }
 
+    public async InfoCommand(interaction: ChatInputCommandInteraction) {
+        return this.Reply(interaction, { description: "Not implemented" });
+    }
+    public async PlaysCommand(interaction: ChatInputCommandInteraction) {
+        return this.Reply(interaction, { description: "Not implemented" });
+    }
+
     public async execute(interaction: ChatInputCommandInteraction): Promise<unknown> {
-        return await interaction.reply({ content: `sc: ${interaction.options.getSubcommand(true)}`})
+        const subcommand = interaction.options.getSubcommand(true);
+        if (subcommand == "info") {
+            return this.InfoCommand(interaction);
+        } else if (subcommand == "plays") {
+            return this.PlaysCommand(interaction);
+        }
     }
 }
