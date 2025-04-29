@@ -1,4 +1,4 @@
-import { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, SlashCommandSubcommandsOnlyBuilder } from "discord.js";
+import { ActionRowBuilder, APIEmbedField, AutocompleteInteraction, ChatInputCommandInteraction, Interaction, MessageActionRowComponentBuilder, SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, SlashCommandSubcommandsOnlyBuilder } from "discord.js";
 import Bot from "../../index";
 
 export default abstract class SlashCommand {
@@ -12,5 +12,9 @@ export default abstract class SlashCommand {
 
     constructor(data: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | SlashCommandOptionsOnlyBuilder) {
         this.data = data.toJSON();
+    }
+
+    public async Reply(interaction: Interaction, data: { content?: string, title?: string, url?: string, description: string, fields?: APIEmbedField[], components?: ActionRowBuilder<MessageActionRowComponentBuilder>[], thumbnail?: string, author?: { name: string, iconURL?: string, url?: string }, unixTime?: string, ephemeral?: boolean }) {
+        return this.bot.ReplyEmbed(interaction, data);
     }
 }
