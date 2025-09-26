@@ -1,11 +1,11 @@
 import fetch from "node-fetch";
 import md5 from "md5";
 import GetRecentTracks, { RecentTracks } from "./responses/user/GetRecentTracks";
-import ErrorResponse from "./responses/ErrorResponse";
+import { ErrorResponse } from "./responses/ErrorResponse";
 import { Collection, User } from "discord.js";
 import UserDB from "../models/UserDB";
-import BotError from "../classes/BotError";
-import ErrorCodes from "../enums/ErrorCodes";
+import { BotError } from "../classes/BotError";
+import { ErrorCodes } from "../enums/ErrorCodes";
 
 class LastfmAuthManager {
     public readonly API_KEY = process.env.LASTFM_API_KEY as string;
