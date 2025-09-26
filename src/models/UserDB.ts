@@ -25,4 +25,4 @@ const UserSchema = new Schema({
     CommandsUsed: Number,
 });
 
-export default model("Users", UserSchema);
+export const UserDB = model("Users", UserSchema);
