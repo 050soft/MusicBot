@@ -17,11 +17,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 import { readdirSync } from "fs";
 import { join } from "path";
-import Bot from "./Bot"
+import { Bot } from "./Bot"
 import { CacheType, Interaction, Collection, ChatInputCommandInteraction, REST, Routes, AutocompleteInteraction } from "discord.js";
-import SlashCommand from "./structures/SlashCommand";
+import { SlashCommand } from "./structures/SlashCommand";
 
-export default class InteractionHandler {
+export class InteractionHandler {
     private readonly bot: Bot;
     private rest = new REST({ version: "10"}).setToken(process.env.TOKEN as string);
     

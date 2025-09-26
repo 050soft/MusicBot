@@ -16,8 +16,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 import { CacheType, Events, Interaction } from "discord.js";
-import Event from "../classes/structures/Event";
-import BotError from "../classes/BotError";
+import { Event } from "../classes/structures/Event";
+import { BotError } from "../classes/BotError";
 import { MongooseError } from "mongoose";
 
 export default class InteractionCreate extends Event<Events.InteractionCreate> {

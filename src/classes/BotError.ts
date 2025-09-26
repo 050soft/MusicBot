@@ -15,8 +15,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-import ErrorCodes from "../enums/ErrorCodes";
-import ErrorMessages from "../enums/ErrorMessages";
+import { ErrorCodes } from "../enums/ErrorCodes";
+import { ErrorMessages } from "../enums/ErrorMessages";
 
 function ErrorMessage(code: ErrorCodes, args?: any) {
     if (!(code in ErrorCodes)) throw new BotError(ErrorCodes.invalidErrorCode);
@@ -26,7 +26,7 @@ function ErrorMessage(code: ErrorCodes, args?: any) {
     return message;
 }
 
-class BotError extends Error {
+export class BotError extends Error {
     public readonly code: ErrorCodes;
 
     constructor(code: ErrorCodes, ...args: any) {
@@ -41,4 +41,3 @@ class BotError extends Error {
     } 
 }
 
-export default BotError;

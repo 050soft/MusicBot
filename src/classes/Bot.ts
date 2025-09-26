@@ -16,18 +16,18 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 import { ActionRowBuilder, APIEmbedField, Client, ClientOptions, Collection, ColorResolvable, EmbedBuilder, Interaction, MessageActionRowComponentBuilder, MessageFlags } from "discord.js";
-import Logger from "./Logger";
-import LogLevel from "../enums/LogLevel";
+import { Logger } from "./Logger";
+import { LogLevel } from "../enums/LogLevel";
 import config from "../config.json";
 
 import { version, commit_id } from "../version";
-import EventHandler from "./EventHandler";
-import InteractionHandler from "./InteractionHandler";
-import DatabaseManager from "./DatabaseManager";
+import { EventHandler } from "./EventHandler";
+import { InteractionHandler } from "./InteractionHandler";
+import { DatabaseManager } from "./DatabaseManager";
 import { Track } from "../lastfm/responses/user/GetRecentTracks";
-import Lastfm from "../lastfm/Lastfm";
+import { Lastfm } from "../lastfm/Lastfm";
 
-class Bot extends Client {
+export class Bot extends Client {
     public readonly InformativeLogging: boolean;
     public readonly DeveloperMode: boolean;
     public readonly ApplicationID: string;
@@ -185,4 +185,3 @@ class Bot extends Client {
     }
 }
 
-export default Bot;

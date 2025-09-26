@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 import { ActionRowBuilder, ChatInputCommandInteraction, MessageActionRowComponentBuilder, MessageFlags, SlashCommandBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } from "discord.js";
-import SlashCommand from "../../../classes/structures/SlashCommand";
+import { SlashCommand } from "../../../classes/structures/SlashCommand";
 
 export default class LoginCommand extends SlashCommand {
     constructor() {

@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder, SlashCommandStringOption, SlashCommandSubcommandBuilder } from "discord.js"
-import SlashCommand from "../../../classes/structures/SlashCommand"
+import { SlashCommand } from "../../../classes/structures/SlashCommand"
 
 export default class ArtistCommand extends SlashCommand {
     constructor() {

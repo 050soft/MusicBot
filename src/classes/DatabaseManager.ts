@@ -16,10 +16,10 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 import { MongooseError, connect } from "mongoose";
-import Bot from "./Bot";
+import { Bot } from "./Bot";
 import UserDB from "../models/UserDB";
 
-export default class DatabaseManager {
+export class DatabaseManager {
     private readonly URL = `mongodb+srv://${process.env.MONGODB_DATABASE_USER}:${process.env.MONGODB_DATABASE_PASSWORD}@${process.env.MONGODB_DATABASE_URL}/?retryWrites=true&w=majority&appName=Cluster0`;
     private readonly bot
     

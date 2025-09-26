@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 import { Events } from "discord.js";
-import Event from "../classes/structures/Event";
+import { Event } from "../classes/structures/Event";
 
 export default class Debug extends Event<Events.Debug> {
     constructor() {

@@ -15,10 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-import Bot from "../../classes/Bot";
-import Manager from "./Manager";
+import { Bot } from "../../classes/Bot";
+import { Manager } from "./Manager";
 
-export default class ArtistManager extends Manager {
+export class ArtistManager extends Manager {
     constructor() {
         super();
     }

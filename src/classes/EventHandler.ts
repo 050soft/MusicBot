@@ -15,12 +15,11 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-import Bot from "./Bot";
+import { Bot } from "./Bot";
 import path from "path";
 import { readdirSync } from "fs";
-import Event from "./structures/Event";
-
-export default class EventHandler {
+import { Event } from "./structures/Event";
+export class EventHandler {
     private readonly bot: Bot;
     private readonly EventsPath = path.join(__dirname, "..", "events");
 

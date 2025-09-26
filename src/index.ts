@@ -17,26 +17,24 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 import "dotenv/config";
 import { GatewayIntentBits } from "discord.js";
-import Bot from "./classes/Bot";
+import { Bot as bot} from "./classes/Bot";
 
-const bot = new Bot({
+export const Bot = new bot({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessagePolls
     ]
 });
-export default bot;
+Bot.login(process.env.TOKEN);
 
-bot.login(process.env.TOKEN);
-
-//bot.Start();
+//Bot.Start();
 
 process.on("uncaughtException", err => {
-    bot.Logger.error(err.message);
-    bot.Logger.debug(err.stack ?? "");
+    Bot.Logger.error(err.message);
+    Bot.Logger.debug(err.stack ?? "");
 });
 
 process.on("unhandledRejection", (err: Error) => {
-    bot.Logger.error(err.message);
-    bot.Logger.debug(err.stack ?? "");
+    Bot.Logger.error(err.message);
+    Bot.Logger.debug(err.stack ?? "");
 })

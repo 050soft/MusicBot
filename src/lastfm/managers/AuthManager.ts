@@ -15,10 +15,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-import Methods from "../responses/Methods";
-import Manager from "./Manager";
+import { Methods } from "../responses/Methods";
+import { Manager } from "./Manager";
 
-export default class AuthManager extends Manager {
+export class AuthManager extends Manager {
     public readonly methodDir = "auth";
     public readonly AuthURL = `http://www.last.fm/api/auth/?api_key=${this.API_KEY}`;
 

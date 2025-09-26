@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 import { ClientEvents } from "discord.js";
-import Bot from "../../index";
+import { Bot } from "../../index";
 
-export default abstract class Event<Event extends keyof ClientEvents> {
+export abstract class Event<Event extends keyof ClientEvents> {
     protected readonly bot = Bot;
 
     public readonly name: Event;

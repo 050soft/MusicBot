@@ -16,9 +16,9 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 import { ActionRowBuilder, APIEmbedField, AutocompleteInteraction, ChatInputCommandInteraction, Interaction, MessageActionRowComponentBuilder, SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, SlashCommandSubcommandsOnlyBuilder } from "discord.js";
-import Bot from "../../index";
+import { Bot } from "../../index";
 
-export default abstract class SlashCommand {
+export abstract class SlashCommand {
     protected readonly bot = Bot;
 
     public readonly data: ReturnType<SlashCommandBuilder["toJSON"]>;

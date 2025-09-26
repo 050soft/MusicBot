@@ -15,17 +15,17 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-import AuthManager from "./managers/AuthManager";
-import AlbumManager from "./managers/AlbumManager";
-import ArtistManager from "./managers/ArtistManager";
-import ChartManager from "./managers/ChartManager";
-import GeoManager from "./managers/GeoManager";
-import LibraryManager from "./managers/LibraryManager";
-import TagManager from "./managers/TagManager";
-import TrackManager from "./managers/TrackManager";
-import UserManager from "./managers/UserManager";
+import { AuthManager } from "./managers/AuthManager";
+import { AlbumManager } from "./managers/AlbumManager";
+import { ArtistManager } from "./managers/ArtistManager";
+import { ChartManager } from "./managers/ChartManager";
+import { GeoManager } from "./managers/GeoManager";
+import { LibraryManager } from "./managers/LibraryManager";
+import { TagManager } from "./managers/TagManager";
+import { TrackManager } from "./managers/TrackManager";
+import { UserManager } from "./managers/UserManager";
 
-export default class Lastfm {
+export class Lastfm {
     public Album: AlbumManager;
     public Artist: ArtistManager;
     public Auth: AuthManager;

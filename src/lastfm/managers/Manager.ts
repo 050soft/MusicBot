@@ -17,15 +17,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 import md5 from "md5";
 import fetch from "node-fetch";
-import Bot from "../../classes/Bot";
-import ErrorResponse, { APIError } from "../responses/ErrorResponse";
-import Response from "../responses/APIResponse";
-import Responses from "../responses/Responses";
+import { APIError, ErrorResponse } from "../responses/ErrorResponse";
+import { Response } from "../responses/APIResponse";
+import { Responses } from "../responses/Responses";
 
 /**
  * The base for each manager, contains some basic functions needed across the board.
  */
-export default class Manager {
+export class Manager {
     public readonly API_KEY = process.env.LASTFM_API_KEY as string;
     public readonly SHARED_SECRET = process.env.LASTFM_SHARED_SECRET as string;
 
