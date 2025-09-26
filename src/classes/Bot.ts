@@ -127,7 +127,7 @@ export class Bot extends Client {
     }
 
     public async GetGuildCount(): Promise<number> {
-        // !! when starting to use shards use the shard-wide counting method
+        // FIXME !! when starting to use shards use the shard-wide counting method
         return this.guilds.cache.size;
     }
 
