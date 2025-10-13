@@ -1,0 +1,21 @@
+# Node modules
+node_modules
+build
+
+# Git
+.git
+.gitignore
+
+# Local env files
+.env
+.env.*
+
+# Logs
+*.log
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Other local files
+README.md
