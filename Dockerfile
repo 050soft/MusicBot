@@ -9,7 +9,7 @@ RUN npm run build
 # Run
 FROM node:20-slim
 WORKDIR /app
-COPY --from=builder /app/build ./buld
+COPY --from=builder /app/build ./build
 COPY package*.json ./
 
 # Install only production dependencies
