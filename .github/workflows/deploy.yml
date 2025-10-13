@@ -3,7 +3,7 @@ name: Build and Deploy Dockerized Bot
 on:
   push:
     branches:
-      - '**'      # Any branch -> development deploy
+      - 'master'      # Any branch -> development deploy
     tags:
       - 'v*'      # Any tag starting with v -> production deploy
 
@@ -12,9 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     # 👇 Dynamically select the right environment
-    environment: ${{ startsWith(github.ref, 'refs/tags/') && 'production' || 'development' }}
+    environment: ${{ startsWith(github.ref, 'refs/tags/') && 'prod' || 'dev' }}
 
     steps:
+      # safeguard: make sure tag is from master
+      - name: Ensure tag is on master
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          BRANCH=$(git branch --contains $GITHUB_SHA)
+          if [[ "$BRANCH" != *master* ]]; then
+            echo "Tag is not on master branch. Aborting."
+            exit 1
+          fi
+
       # 1️⃣ Checkout your code
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,7 +48,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:${{ startsWith(github.ref, 'refs/tags/') && 'prod' || 'dev' }}
+            ghcr.io/${{ github.repository.toLowerCase() }}:${{ startsWith(github.ref, 'refs/tags/') && 'prod' || 'dev' }}
 
       # 5️⃣ Deploy to your remote server via SSH
       - name: Deploy to Server
@@ -62,7 +72,7 @@ jobs:
             fi
 
             # Pull latest image
-            docker pull ghcr.io/${{ github.repository }}:$TAG
+            docker pull ghcr.io/${{ github.repository.toLowerCase() }}:$TAG
 
             # Stop and remove old container if exists
             docker stop $NAME || true
@@ -79,4 +89,4 @@ jobs:
               -e MONGODB_DATABASE_USER=${{ secrets.MONGODB_DATABASE_USER }} \
               -e MONGODB_DATABASE_PASSWORD=${{ secrets.MONGODB_DATABASE_PASSWORD }} \
               -p $PORT:8080 \
-              ghcr.io/${{ github.repository }}:$TAG
+              ghcr.io/${{ github.repository.toLowerCase() }}:$TAG
