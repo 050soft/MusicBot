@@ -94,6 +94,8 @@ jobs:
               echo "🧩 Deploying DEVELOPMENT"
             fi
 
+            echo "${{ secrets.PACKAGE_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
             # Pull latest image
             docker pull ghcr.io/050soft/musicbot:$TAG
 
