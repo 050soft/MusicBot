@@ -48,7 +48,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository.toLowerCase() }}:${{ startsWith(github.ref, 'refs/tags/') && 'prod' || 'dev' }}
+            ghcr.io/050soft/musicbot:${{ startsWith(github.ref, 'refs/tags/') && 'prod' || 'dev' }}
 
       # 5️⃣ Deploy to your remote server via SSH
       - name: Deploy to Server
@@ -72,7 +72,7 @@ jobs:
             fi
 
             # Pull latest image
-            docker pull ghcr.io/${{ github.repository.toLowerCase() }}:$TAG
+            docker pull ghcr.io/050soft/musicbot:$TAG
 
             # Stop and remove old container if exists
             docker stop $NAME || true
@@ -89,4 +89,4 @@ jobs:
               -e MONGODB_DATABASE_USER=${{ secrets.MONGODB_DATABASE_USER }} \
               -e MONGODB_DATABASE_PASSWORD=${{ secrets.MONGODB_DATABASE_PASSWORD }} \
               -p $PORT:8080 \
-              ghcr.io/${{ github.repository.toLowerCase() }}:$TAG
+              ghcr.io/050soft/musicbot:$TAG
