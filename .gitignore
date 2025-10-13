@@ -8,7 +8,6 @@
 # Node/NPM
 build/
 node_modules
-package-lock.json
 
 # Code Editors
 .vs
