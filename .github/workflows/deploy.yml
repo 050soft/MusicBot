@@ -80,9 +80,6 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          env:
-            PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-            USERNAME: ${{ github.actor }}
           script: |
             # Determine environment
             if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
@@ -97,7 +94,7 @@ jobs:
               echo "🧩 Deploying DEVELOPMENT"
             fi
 
-            echo "$PACKAGE_TOKEN" | docker login ghcr.io -u $USERNAME --password-stdin
+            echo "${{ secrets.PACKAGE_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
             # Pull latest image
             docker pull ghcr.io/050soft/musicbot:$TAG
