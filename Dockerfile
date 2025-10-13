@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json tsconfig.json ./
 RUN npm ci
 COPY src ./src
+COPY src/version.js ./build/version.js
 RUN npm run build
 
 # Run
