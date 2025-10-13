@@ -105,7 +105,7 @@ jobs:
 
             # Run new container with environment secrets
             docker run -d --name $NAME \
-              -- restart unless-stopped \
+              --restart unless-stopped \
               -e TOKEN=${{ secrets.TOKEN }} \
               -e PUBLIC_KEY=${{ secrets.PUBLIC_KEY }} \
               -e CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} \
