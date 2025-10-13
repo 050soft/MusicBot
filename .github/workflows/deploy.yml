@@ -25,6 +25,30 @@ jobs:
             exit 1
           fi
 
+      - name: Generate version.js
+        run: |
+            mkdir -p dist
+            COMMIT_ID=$(git rev-parse HEAD | cut -c1-7)
+            YEAR=$(date +%Y)
+            VERSION=$(jq -r .version package.json)
+            TAG=$(jq -r .version_tag package.json)
+
+            if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+                SUFFIX="prod"
+            else
+                SUFFIX="dev"
+            fi
+
+            if [ "$TAG" != "null" ]; then
+            FULL_VERSION="${YEAR}.${VERSION}-${TAG}-${SUFFIX}"
+            else
+            FULL_VERSION="${YEAR}.${VERSION}-${SUFFIX}"
+            fi
+
+            echo "const version = \"$FULL_VERSION\"; const commit_id = \"$COMMIT_ID\"; module.exports = { version, commit_id };" > src/version.js
+
+        
+
       # 1️⃣ Checkout your code
       - name: Checkout repository
         uses: actions/checkout@v4

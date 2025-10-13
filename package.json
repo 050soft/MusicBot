@@ -5,10 +5,10 @@
   "description": "A Discord music bot that features Last.fm and Discogs integration.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc --diagnostics && node scripts/version.js",
+    "build": "tsc --diagnostics",
     "prestart": "tsc --diagnostics && node scripts/version.js",
     "start": "node build/index.js",
-    "start:dev": "npm run start",
+    "start:dev": "node scripts/version.js && npm run start",
     "postversion": "node scripts/version.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
