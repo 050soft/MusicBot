@@ -36,7 +36,7 @@
     "node-fetch": "^2.7.0"
   },
   "devDependencies": {
-    "@types/md5": "^2.3.5",
+    "@types/md5": "^2.3.6",
     "@types/node-fetch": "^2.6.12",
     "typescript": "^5.9.3"
   }
