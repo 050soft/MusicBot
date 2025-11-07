@@ -31,7 +31,7 @@
     "discord.js": "^14.24.2",
     "dotenv": "^17.0.0",
     "md5": "^2.3.0",
-    "mongodb": "^6.13.1",
+    "mongodb": "^7.0.0",
     "mongoose": "^8.19.2",
     "node-fetch": "^2.7.0"
   },
