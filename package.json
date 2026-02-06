@@ -29,7 +29,7 @@
   "homepage": "https://github.com/050soft/MusicBot#readme",
   "dependencies": {
     "discord.js": "^14.25.1",
-    "dotenv": "^17.0.0",
+    "dotenv": "^17.2.4",
     "md5": "^2.3.0",
     "mongodb": "^6.13.1",
     "mongoose": "^9.1.3",
